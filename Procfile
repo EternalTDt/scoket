@@ -1,1 +1,1 @@
-web: gunicorn socketstore.wsgi --log-file -
+web: gunicorn socketstore.wsgi --preload --log-file -
