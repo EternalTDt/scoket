@@ -21,6 +21,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'potapovvstore.herokuapp.com']
 
 
@@ -33,12 +35,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 
-    # django apps #
+    # project apps #
     'core',
+    'fakeapi',
 
     # 3d party applications #
     'whitenoise.runserver_nostatic',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
