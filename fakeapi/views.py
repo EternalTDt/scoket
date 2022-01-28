@@ -1,4 +1,8 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import AllowAny
+from .serializers import MyTokenObtainPairSerializer
 from .models import (
     FirstLevelCategory, 
     SecondLevelCategory,
@@ -19,12 +23,14 @@ from .serializers import (
 class FirstLevelCategoryListView(generics.ListCreateAPIView):
     queryset = FirstLevelCategory.objects.all()
     serializer_class = FirstLevelCategorySerializer
+    permission_classes = [IsAuthenticated]
 
 
 class FirstLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = FirstLevelCategory.objects.all()
     serializer_class = FirstLevelCategorySerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticated]
 
 
 # SecondLevelCategory
@@ -33,12 +39,14 @@ class FirstLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 class SecondLevelCategoryListView(generics.ListCreateAPIView):
     queryset = SecondLevelCategory.objects.all()
     serializer_class = SecondLevelCategorySerializer
+    permission_classes = [IsAuthenticated]
 
 
 class SecondLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = SecondLevelCategory.objects.all()
     serializer_class = SecondLevelCategorySerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticated]
 
 
 # ThirdLevelCategory
@@ -47,12 +55,14 @@ class SecondLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 class ThirdLevelCategoryListView(generics.ListCreateAPIView):
     queryset = ThirdLevelCategory.objects.all()
     serializer_class = ThirdLevelCategorySerializer
+    permission_classes = [IsAuthenticated]
 
 
 class ThirdLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ThirdLevelCategory.objects.all()
     serializer_class = ThirdLevelCategorySerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticated]
 
 
 # Brand Serializer
@@ -60,9 +70,17 @@ class ThirdLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 class BrandListView(generics.ListCreateAPIView):
     queryset = Brand.objects.all()
     serializer_classe = BrandSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Brand.objects.all()
     serializer_classe = BrandSerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticated]
+
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+    
