@@ -1,8 +1,5 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import AllowAny
-from .serializers import MyTokenObtainPairSerializer
 from .models import (
     FirstLevelCategory, 
     SecondLevelCategory,
@@ -78,9 +75,3 @@ class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_classe = BrandSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticated]
-
-
-class MyObtainTokenPairView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    serializer_class = MyTokenObtainPairSerializer
-    
