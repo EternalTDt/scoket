@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # 3d party applications #
     'djoser',
+    'drf_yasg',
     # 'whitenoise.runserver_nostatic',
 ]
 
