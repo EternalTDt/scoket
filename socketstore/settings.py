@@ -126,8 +126,8 @@ REST_FRAMEWORK = {
 # SMTP CONF
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'demidovbest@gmail.com'
-EMAIL_HOST_PASSWORD = 'wokzwrgjnrwitpjp'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 
