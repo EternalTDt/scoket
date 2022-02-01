@@ -7,6 +7,7 @@ class AbstractCollection(models.Model):
     name = models.CharField('Название', max_length=60)
     code = models.CharField('Код', max_length=20)
     description = models.TextField('Описание')
+    price = models.DecimalField('Стоимость', decimal_places=2, max_digits=10)
 
     class Meta:
         abstract = True
