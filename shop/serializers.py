@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import category_models
 from .models import brand_models
-
+from .models import collection_models
 
 class FirstLevelCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,5 +33,12 @@ class ThirdLevelCategorySerializer(serializers.ModelSerializer):
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = brand_models.Brand
+        fields = ('__all__')
+        lookup_field = 'slug'
+
+
+class CollectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = collection_models.Collection
         fields = ('__all__')
         lookup_field = 'slug'

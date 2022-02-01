@@ -2,11 +2,13 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import category_models
 from .models import brand_models
+from .models import collection_models
 from .serializers import (
     FirstLevelCategorySerializer, 
     SecondLevelCategorySerializer, 
     ThirdLevelCategorySerializer,
     BrandSerializer,
+    CollectionSerializer
 )
 
 
@@ -58,7 +60,7 @@ class ThirdLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# Brand Serializer
+# Brand
 
 class BrandListView(generics.ListCreateAPIView):
     queryset = brand_models.Brand.objects.all()
@@ -69,5 +71,20 @@ class BrandListView(generics.ListCreateAPIView):
 class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = brand_models.Brand.objects.all()
     serializer_class = BrandSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Collection
+
+class CollectionListView(generics.ListCreateAPIView):
+    queryset = collection_models.Collection.objects.all()
+    serializer_class = CollectionSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class CollectionDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = collection_models.Collection.objects.all()
+    serializer_class = CollectionSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
