@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # project apps #
     'core',
-    'fakeapi',
+    'shop',
 
     # 3d party applications #
     'djoser',

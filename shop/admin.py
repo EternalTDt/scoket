@@ -1,24 +1,20 @@
-from dataclasses import field
 from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import (
-     FirstLevelCategory, 
-     SecondLevelCategory, 
-     ThirdLevelCategory,
-     Brand,
-)
+from .models import category_models
+from .models import brand_models
+from .models import collection_models
 
 
 class BrandAdminForm(forms.ModelForm):
     description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
     class Meta:
-        model = Brand
+        model = brand_models.Brand
         fields = ('__all__')
 
 
-@admin.register(FirstLevelCategory)
+@admin.register(category_models.FirstLevelCategory)
 class FirstLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
@@ -27,7 +23,7 @@ class FirstLevelCategoryAdmin(admin.ModelAdmin):
     save_as = True
 
 
-@admin.register(SecondLevelCategory)
+@admin.register(category_models.SecondLevelCategory)
 class SecondLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'category',)
     list_display_links = ('name',)
@@ -36,7 +32,7 @@ class SecondLevelCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-@admin.register(ThirdLevelCategory)
+@admin.register(category_models.ThirdLevelCategory)
 class ThirdLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'category',)
     list_display_links = ('name',)
@@ -45,10 +41,24 @@ class ThirdLevelCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-@admin.register(Brand)
+@admin.register(brand_models.Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     form = BrandAdminForm
+
+
+class CollectionImageInline(admin.TabularInline):
+    model = collection_models.CollectionImage
+    extra = 3
+
+
+@admin.register(collection_models.Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [CollectionImageInline,]

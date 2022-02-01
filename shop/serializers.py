@@ -1,15 +1,11 @@
 from rest_framework import serializers
-from .models import ( 
-    FirstLevelCategory, 
-    SecondLevelCategory, 
-    ThirdLevelCategory,
-    Brand,
-)
+from .models import category_models
+from .models import brand_models
 
 
 class FirstLevelCategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = FirstLevelCategory
+        model = category_models.FirstLevelCategory
         fields = ('__all__')
         lookup_field = 'slug'
 
@@ -19,7 +15,7 @@ class SecondLevelCategorySerializer(serializers.ModelSerializer):
     category = FirstLevelCategorySerializer()
 
     class Meta:
-        model = SecondLevelCategory
+        model = category_models.SecondLevelCategory
         fields = ('__all__')
         lookup_field = 'slug'
 
@@ -29,13 +25,13 @@ class ThirdLevelCategorySerializer(serializers.ModelSerializer):
     category = SecondLevelCategorySerializer()
 
     class Meta:
-        model = ThirdLevelCategory
+        model = category_models.ThirdLevelCategory
         fields = ('__all__')
         lookup_field = 'slug'
 
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Brand
+        model = brand_models.Brand
         fields = ('__all__')
         lookup_field = 'slug'

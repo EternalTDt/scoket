@@ -1,15 +1,8 @@
 from django.db import models
+from . import abstract_models
 
 
-class AbstractCategory(models.Model):
-    name = models.CharField('Название', max_length=60, default='')
-    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
-
-    class Meta:
-        abstract = True
-
-
-class FirstLevelCategory(AbstractCategory):
+class FirstLevelCategory(abstract_models.AbstractCategory):
     image = models.ImageField('Изображение', upload_to='first_level_cat_photos')
 
     def __str__(self) -> str:
@@ -22,7 +15,7 @@ class FirstLevelCategory(AbstractCategory):
     objects = models.Manager()
 
 
-class SecondLevelCategory(AbstractCategory):
+class SecondLevelCategory(abstract_models.AbstractCategory):
     category = models.ForeignKey(FirstLevelCategory, on_delete=models.CASCADE, verbose_name='Категория', related_name='second_level_category')
     image = models.ImageField('Изображение', upload_to='second_level_cat_photos')
 
@@ -36,7 +29,7 @@ class SecondLevelCategory(AbstractCategory):
     objects = models.Manager()
 
 
-class ThirdLevelCategory(AbstractCategory):
+class ThirdLevelCategory(abstract_models.AbstractCategory):
     category = models.ForeignKey(SecondLevelCategory, on_delete=models.CASCADE, verbose_name='Категория', related_name='third_level_category')
     image = models.ImageField('Изображение', upload_to='third_level_cat_photos')
 
@@ -46,19 +39,5 @@ class ThirdLevelCategory(AbstractCategory):
     class Meta:
         verbose_name = "Категория 3 уровня"
         verbose_name_plural = "Категории 3 уровня"
-
-    objects = models.Manager()
-
-
-class Brand(AbstractCategory):
-    description = models.TextField('Описание')
-    image = models.ImageField('Изображение', upload_to='brand_photos')
-
-    def __str__(self) -> str:
-        return self.name
-
-    class Meta:
-        verbose_name = "Бренд"
-        verbose_name_plural = "Бренды"
 
     objects = models.Manager()
