@@ -1,6 +1,6 @@
-from tabnanny import verbose
 from django.db import models
-from . import abstract_models
+from sorl.thumbnail import get_thumbnail
+from django.utils.html import format_html
 
 
 class AbstractCollection(models.Model):
@@ -15,9 +15,21 @@ class AbstractCollection(models.Model):
 
 class Collection(AbstractCollection):
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
+    thumbnail = models.ImageField(upload_to='collection_images', null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
+
+    @property
+    def thumbnail_preview(self):
+        if self.thumbnail:
+            _thumbnail = get_thumbnail(self.thumbnail,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_thumbnail.url, _thumbnail.width, _thumbnail.height))
+        return ""
 
     class Meta:
         verbose_name = "Коллекция"
@@ -25,7 +37,7 @@ class Collection(AbstractCollection):
 
 
 class CollectionColor(models.Model):
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='colors')
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='color')
     color = models.CharField('Цвет', max_length=60)
     color_code = models.CharField('Код цвета', max_length=60, default='#fff')
     image = models.ImageField('Изображение', upload_to='collection_images')

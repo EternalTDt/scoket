@@ -37,7 +37,16 @@ class BrandSerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
+class CollectionColorSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = collection_models.CollectionColor
+        fields = ('color', 'color_code', 'image')
+
+
 class CollectionSerializer(serializers.ModelSerializer):
+    color = CollectionColorSerializer(many=True)
+
     class Meta:
         model = collection_models.Collection
         fields = ('__all__')

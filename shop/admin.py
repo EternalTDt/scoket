@@ -57,8 +57,15 @@ class CollectionColorInline(admin.TabularInline):
 
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'thumbnail_preview',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     inlines = [CollectionColorInline,]
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
