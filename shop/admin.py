@@ -50,8 +50,8 @@ class BrandAdmin(admin.ModelAdmin):
     form = BrandAdminForm
 
 
-class CollectionImageInline(admin.TabularInline):
-    model = collection_models.CollectionImage
+class CollectionColorInline(admin.TabularInline):
+    model = collection_models.CollectionColor
     extra = 3
 
 
@@ -61,4 +61,4 @@ class CollectionAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
-    inlines = [CollectionImageInline,]
+    inlines = [CollectionColorInline,]

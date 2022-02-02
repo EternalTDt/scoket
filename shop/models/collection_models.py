@@ -24,10 +24,12 @@ class Collection(AbstractCollection):
         verbose_name_plural = "Коллекции"
 
 
-class CollectionImage(models.Model):
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='images')
+class CollectionColor(models.Model):
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='colors')
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
     image = models.ImageField('Изображение', upload_to='collection_images')
 
     class Meta:
-        verbose_name = "Изображение"
-        verbose_name_plural = "Изображения"
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
