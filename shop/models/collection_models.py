@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html

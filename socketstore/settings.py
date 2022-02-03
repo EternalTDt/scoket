@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # project apps #
     'core',
     'shop',
+    'mainpage',
 
     # 3d party applications #
     'djoser',
