@@ -15,6 +15,9 @@ from .views import (
 
     CollectionListView,
     CollectionDetailView,
+
+    CollectionOfferListView,
+    CollectionOfferDetailView,
 )
 
 urlpatterns = [
@@ -28,6 +31,8 @@ urlpatterns = [
     path('brand/<slug:slug>', BrandDetailView.as_view(), name='brand-detail'),
     path('collection/', CollectionListView.as_view(), name='collection'),
     path('collection/<slug:slug>', CollectionDetailView.as_view(), name='collection-detail'),
+    path('collection-offer/', CollectionOfferListView.as_view(), name='collection-offer'),
+    path('collection-offer/<slug:slug>', CollectionOfferDetailView.as_view(), name='collection-offer-detail'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json'])

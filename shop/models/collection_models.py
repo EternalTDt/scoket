@@ -28,7 +28,7 @@ class AbstractCollection(models.Model):
 
 class Collection(AbstractCollection):
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
-    thumbnail = models.ImageField(upload_to='collection_images', null=True, blank=True)
+    thumbnail = models.ImageField("Изображение", upload_to='collection_images', null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name

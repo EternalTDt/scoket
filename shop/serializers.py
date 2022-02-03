@@ -51,3 +51,10 @@ class CollectionSerializer(serializers.ModelSerializer):
         model = collection_models.Collection
         fields = ('__all__')
         lookup_field = 'slug'
+
+
+class CollectionOfferSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = collection_models.CollectionOffer
+        fields = ('__all__')
+        lookup_field = 'slug'

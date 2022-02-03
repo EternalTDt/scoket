@@ -8,7 +8,8 @@ from .serializers import (
     SecondLevelCategorySerializer, 
     ThirdLevelCategorySerializer,
     BrandSerializer,
-    CollectionSerializer
+    CollectionSerializer,
+    CollectionOfferSerializer
 )
 
 
@@ -86,5 +87,20 @@ class CollectionListView(generics.ListCreateAPIView):
 class CollectionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = collection_models.Collection.objects.all()
     serializer_class = CollectionSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Collection offer
+
+class CollectionOfferListView(generics.ListCreateAPIView):
+    queryset = collection_models.CollectionOffer.objects.all()
+    serializer_class = CollectionOfferSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class CollectionOfferDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = collection_models.CollectionOffer.objects.all()
+    serializer_class = CollectionOfferSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
