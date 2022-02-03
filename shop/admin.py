@@ -50,9 +50,15 @@ class BrandAdmin(admin.ModelAdmin):
     form = BrandAdminForm
 
 
-class CollectionColorInline(admin.TabularInline):
+class CollectionColorInline(admin.StackedInline):
     model = collection_models.CollectionColor
-    extra = 3
+    extra = 1
+
+
+class CollectionInline(admin.StackedInline):
+    model = collection_models.Collection
+    fields = ('name', 'thumbnail')
+    extra = 0
 
 
 @admin.register(collection_models.Collection)
@@ -69,3 +75,12 @@ class CollectionAdmin(admin.ModelAdmin):
 
     thumbnail_preview.short_description = 'Изображение'
     thumbnail_preview.allow_tags = True
+
+
+@admin.register(collection_models.CollectionOffer)
+class CollectionOfferAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [CollectionInline,]

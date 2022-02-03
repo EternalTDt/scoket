@@ -1,13 +1,26 @@
+from tabnanny import verbose
 from django.db import models
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 
+class CollectionOffer(models.Model):
+    name = models.CharField('Название', max_length=60)
+    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name = "Предложение"
+        verbose_name_plural = "Предложения"
 
 class AbstractCollection(models.Model):
     name = models.CharField('Название', max_length=60)
     code = models.CharField('Код', max_length=20)
     description = models.TextField('Описание')
     price = models.DecimalField('Стоимость', decimal_places=2, max_digits=10)
+    manufacturer = models.CharField('Производитель', max_length=60, default='Schneider Electric')
+    coolection_offer = models.ForeignKey(CollectionOffer, on_delete=models.CASCADE, verbose_name="Предложение", related_name='collection', blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -37,10 +50,13 @@ class Collection(AbstractCollection):
 
 
 class CollectionColor(models.Model):
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='color')
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, verbose_name="Коллекция", related_name='color')
     color = models.CharField('Цвет', max_length=60)
     color_code = models.CharField('Код цвета', max_length=60, default='#fff')
     image = models.ImageField('Изображение', upload_to='collection_images')
+
+    def __str__(self) -> str:
+        return self.color
 
     class Meta:
         verbose_name = "Цвет"
