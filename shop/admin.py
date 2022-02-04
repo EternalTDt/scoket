@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+from shop.models import abstract_models
 from .models import category_models
 from .models import brand_models
 from .models import collection_models
+from .models import product_models
 
 
 class BrandAdminForm(forms.ModelForm):
@@ -61,6 +64,11 @@ class CollectionInline(admin.StackedInline):
     extra = 0
 
 
+class SocketColorInline(admin.StackedInline):
+    model = product_models.SocketColor
+    extra = 1
+
+
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -84,3 +92,34 @@ class CollectionOfferAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     inlines = [CollectionInline,]
+
+
+@admin.register(product_models.Socket)
+class SocketAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'grounding', 'kids_protection', 'backlight',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [SocketColorInline,]
+
+    fieldsets = (
+        ('Основные', {
+            'fields': ('name', 'slug', 'socket_type', 'montage', 'terminal', 'rated_current')
+        }),
+        ('Технические характеристики', {
+            'fields': ('socket', 'grounding', 'protection', 'kids_protection', 'backlight', 'material', 'equipment')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
