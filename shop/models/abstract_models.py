@@ -7,3 +7,12 @@ class AbstractCategory(models.Model):
 
     class Meta:
         abstract = True
+
+
+class AbstractCollection(models.Model):
+    name = models.CharField('Название', max_length=60)
+    code = models.CharField('Код', max_length=20)
+    description = models.TextField('Описание')
+
+    class Meta:
+        abstract = True

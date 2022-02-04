@@ -1,4 +1,5 @@
 from django.db import models
+from . import abstract_models
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 
@@ -13,21 +14,13 @@ class CollectionOffer(models.Model):
         verbose_name = "Предложение"
         verbose_name_plural = "Предложения"
 
-class AbstractCollection(models.Model):
-    name = models.CharField('Название', max_length=60)
-    code = models.CharField('Код', max_length=20)
-    description = models.TextField('Описание')
+
+class Collection(abstract_models.AbstractCollection):
+    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
+    thumbnail = models.ImageField("Изображение", upload_to='collection_images', null=True, blank=True)
     price = models.DecimalField('Стоимость', decimal_places=2, max_digits=10)
     manufacturer = models.CharField('Производитель', max_length=60, default='Schneider Electric')
     coolection_offer = models.ForeignKey(CollectionOffer, on_delete=models.CASCADE, verbose_name="Предложение", related_name='collection', blank=True, null=True)
-
-    class Meta:
-        abstract = True
-
-
-class Collection(AbstractCollection):
-    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
-    thumbnail = models.ImageField("Изображение", upload_to='collection_images', null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
