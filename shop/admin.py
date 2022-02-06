@@ -68,6 +68,11 @@ class SocketColorInline(admin.StackedInline):
     extra = 1
 
 
+class SwitchColorInline(admin.StackedInline):
+    model = product_models.SwitchColor
+    extra = 1
+
+
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -114,6 +119,40 @@ class SocketAdmin(admin.ModelAdmin):
         }),
         ('Технические характеристики', {
             'fields': ('socket', 'grounding', 'protection', 'kids_protection', 'backlight', 'material', 'equipment')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Switch)
+class SwitchAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'backlight',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [SwitchColorInline,]
+
+    fieldsets = (
+        ('Основные', {
+            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'switch_type', 'montage', 'terminal', 'rated_current')
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('control', 'frame_places', 'protection', 'backlight', 'material', 'equipment')
         }),
         ('Размеры', {
             'fields': ('width', 'height', 'depth')
