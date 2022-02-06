@@ -2,7 +2,6 @@ from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from shop.models import abstract_models
 from .models import category_models
 from .models import brand_models
 from .models import collection_models
@@ -108,7 +107,10 @@ class SocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Основные', {
-            'fields': ('name', 'slug', 'socket_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'socket_type', 'montage', 'terminal', 'rated_current')
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
         }),
         ('Технические характеристики', {
             'fields': ('socket', 'grounding', 'protection', 'kids_protection', 'backlight', 'material', 'equipment')

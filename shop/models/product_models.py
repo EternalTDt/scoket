@@ -15,7 +15,7 @@ class Socket(abstract_models.AbstractProduct):
     grounding = models.BooleanField("Заземление", default=True)
     protection = models.CharField("Пылевлагозащищенность", max_length=20)
     kids_protection = models.BooleanField("Защита от детей", blank=True)
-    backlight = models.BooleanField("Подстветка", default=False)
+    backlight = models.BooleanField("Подсветка", default=False)
     material = models.CharField("Материал", max_length=20)
     equipment = models.CharField("Комплектация", max_length=60)
     width = models.IntegerField("Ширина", default=0)
