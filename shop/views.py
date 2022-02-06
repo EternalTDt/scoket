@@ -1,15 +1,23 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from .models import category_models
 from .models import brand_models
 from .models import collection_models
+from .models import product_models
+
 from .serializers import (
     FirstLevelCategorySerializer, 
     SecondLevelCategorySerializer, 
     ThirdLevelCategorySerializer,
+
     BrandSerializer,
+
     CollectionSerializer,
-    CollectionOfferSerializer
+    CollectionOfferSerializer,
+
+    SocketSerializer,
+    SwitchSerializer,
 )
 
 
@@ -102,5 +110,35 @@ class CollectionOfferListView(generics.ListCreateAPIView):
 class CollectionOfferDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = collection_models.CollectionOffer.objects.all()
     serializer_class = CollectionOfferSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Socket
+
+class SocketListView(generics.ListCreateAPIView):
+    queryset = product_models.Socket.objects.all()
+    serializer_class = SocketSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class SocketDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Socket.objects.all()
+    serializer_class = SocketSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Switch
+
+class SwitchListView(generics.ListCreateAPIView):
+    queryset = product_models.Switch.objects.all()
+    serializer_class = SwitchSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class SwitchDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Switch.objects.all()
+    serializer_class = SwitchSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
