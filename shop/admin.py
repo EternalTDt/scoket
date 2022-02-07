@@ -99,19 +99,19 @@ class SwitchColorInline(admin.StackedInline):
 
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'thumbnail_preview',)
-    readonly_fields = ('thumbnail_preview',)
+    list_display = ('name',)
+    # readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     inlines = [CollectionColorInline,]
     form = CollectionAdminForm
 
-    def thumbnail_preview(self, obj):
-            return obj.thumbnail_preview
+    # def thumbnail_preview(self, obj):
+    #         return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
-    thumbnail_preview.allow_tags = True
+    # thumbnail_preview.short_description = 'Изображение'
+    # thumbnail_preview.allow_tags = True
 
 
 @admin.register(collection_models.CollectionOffer)
@@ -125,9 +125,9 @@ class CollectionOfferAdmin(admin.ModelAdmin):
 
 @admin.register(product_models.Socket)
 class SocketAdmin(admin.ModelAdmin):
-    list_display = ('name', 'thumbnail_preview',)
+    list_display = ('name',)
     list_filter = ('availability', 'grounding', 'kids_protection', 'backlight',)
-    readonly_fields = ('thumbnail_preview',)
+    # readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -160,9 +160,9 @@ class SocketAdmin(admin.ModelAdmin):
 
 @admin.register(product_models.Switch)
 class SwitchAdmin(admin.ModelAdmin):
-    list_display = ('name', 'thumbnail_preview',)
+    list_display = ('name',)
     list_filter = ('availability', 'backlight',)
-    readonly_fields = ('thumbnail_preview',)
+    # readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -186,8 +186,8 @@ class SwitchAdmin(admin.ModelAdmin):
         }),
     )
 
-    def thumbnail_preview(self, obj):
-            return obj.thumbnail_preview
+    # def thumbnail_preview(self, obj):
+    #         return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
-    thumbnail_preview.allow_tags = True
+    # thumbnail_preview.short_description = 'Изображение'
+    # thumbnail_preview.allow_tags = True
