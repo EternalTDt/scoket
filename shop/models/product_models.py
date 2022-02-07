@@ -70,7 +70,7 @@ class SocketColor(models.Model):
 # Switch
 
 class Switch(abstract_models.AbstractProduct):
-    switch_type = models.CharField("Тип", max_length=20)
+    switch_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
     terminal = models.CharField("Клемма", max_length=20)
     rated_current = models.CharField("Номинальный ток", max_length=20)

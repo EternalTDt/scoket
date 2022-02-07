@@ -16,6 +16,30 @@ class BrandAdminForm(forms.ModelForm):
         fields = ('__all__')
 
 
+class SocketAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Socket
+        fields = ('__all__')
+
+
+class SwitchAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Switch
+        fields = ('__all__')    
+
+
+class CollectionAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = collection_models.Collection
+        fields = ('__all__')        
+
+
 @admin.register(category_models.FirstLevelCategory)
 class FirstLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -81,6 +105,7 @@ class CollectionAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     inlines = [CollectionColorInline,]
+    form = CollectionAdminForm
 
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
@@ -109,6 +134,7 @@ class SocketAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
     inlines = [SocketColorInline,]
+    form = SocketAdminForm
 
     fieldsets = (
         ('Основные', {
@@ -143,6 +169,7 @@ class SwitchAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
     inlines = [SwitchColorInline,]
+    form = SwitchAdminForm
 
     fieldsets = (
         ('Основные', {
