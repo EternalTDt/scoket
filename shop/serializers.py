@@ -67,6 +67,8 @@ class CollectionSerializer(serializers.ModelSerializer):
 
 
 class CollectionOfferSerializer(serializers.ModelSerializer):
+    collection = CollectionSerializer(many=True)
+
     class Meta:
         model = collection_models.CollectionOffer
         fields = ('__all__')
