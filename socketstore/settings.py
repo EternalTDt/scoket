@@ -2,6 +2,8 @@ import os
 import environ
 import dj_database_url
 from datetime import timedelta
+import cloudinary
+import cloudinary_storage
 
 env = environ.Env()
 # reading .env file
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'sorl.thumbnail',
     'whitenoise.runserver_nostatic',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -170,8 +174,13 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+cloudinary.config( 
+  cloud_name = "socket-store", 
+  api_key = "568626483876866", 
+  api_secret = "HaNqumhsH0zpQ-sffouwlQ1qgsM" 
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -182,6 +191,7 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -251,11 +261,13 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-WHITENOISE_AUTOREFRESH = True
 
 
 CORS_ALLOWED_ORIGINS = [
