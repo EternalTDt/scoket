@@ -1,7 +1,3 @@
-from http.client import SWITCHING_PROTOCOLS
-from operator import mod
-from re import M
-from unittest import case
 from django.db import models
 from . import abstract_models
 from sorl.thumbnail import get_thumbnail
@@ -116,6 +112,112 @@ class SwitchColor(models.Model):
     color = models.CharField('Цвет', max_length=60)
     color_code = models.CharField('Код цвета', max_length=60, default='#fff')
     image = models.ImageField('Изображение', upload_to='switch_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
+        app_label="shop"
+
+
+# Frame
+
+class Frame(abstract_models.AbstractProduct):
+    frame_type = models.CharField("Тип", max_length=40)
+    frame_places = models.IntegerField("Количество мест в рамке", default=1)
+    thumbnail = models.ImageField("Изображение", upload_to='frame_images', null=True, blank=True)
+    material = models.CharField("Материал", max_length=20)
+    equipment = models.CharField("Комплектация", max_length=60)
+    width = models.IntegerField("Ширина", default=0)
+    height = models.IntegerField("Высота", default=0)
+    depth = models.IntegerField("Глубина", default=0)
+
+    def __str__(self) -> str:
+        return f'{self.code}: {self.name}'
+
+    @property
+    def thumbnail_preview(self):
+        if self.thumbnail:
+            _thumbnail = get_thumbnail(self.thumbnail,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_thumbnail.url, _thumbnail.width, _thumbnail.height))
+        return ""
+
+    class Meta:
+        verbose_name = "Рамка"
+        verbose_name_plural = "Рамки"
+        app_label="shop"
+
+
+class FrameColor(models.Model):
+    frame = models.ForeignKey(
+        Frame,
+        on_delete=models.CASCADE,
+        verbose_name="Рамка",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='frame_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
+        app_label="shop"
+
+
+# Plug
+
+class Plug(abstract_models.AbstractProduct):
+    plug_type = models.CharField("Тип", max_length=40)
+    montage = models.CharField("Монтаж", max_length=20)
+    thumbnail = models.ImageField("Изображение", upload_to='plug_images', null=True, blank=True)
+    protection = models.CharField("Пылевлагозащищенность", max_length=20)
+    backlight = models.BooleanField("Подсветка", default=False)
+    peculiarities = models.CharField("Особенности", max_length=60)
+    material = models.CharField("Материал", max_length=20)
+    width = models.IntegerField("Ширина", default=0)
+    height = models.IntegerField("Высота", default=0)
+    depth = models.IntegerField("Глубина", default=0)
+
+    def __str__(self) -> str:
+        return f'{self.code}: {self.name}'
+
+    @property
+    def thumbnail_preview(self):
+        if self.thumbnail:
+            _thumbnail = get_thumbnail(self.thumbnail,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_thumbnail.url, _thumbnail.width, _thumbnail.height))
+        return ""
+
+    class Meta:
+        verbose_name = "Заглушка"
+        verbose_name_plural = "Заглушки"
+        app_label="shop"
+
+
+class PlugColor(models.Model):
+    plug = models.ForeignKey(
+        Plug,
+        on_delete=models.CASCADE,
+        verbose_name="Заглушка",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='plug_images')
 
     def __str__(self) -> str:
         return self.color

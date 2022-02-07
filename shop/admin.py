@@ -32,12 +32,28 @@ class SwitchAdminForm(forms.ModelForm):
         fields = ('__all__')    
 
 
+class FrameAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Frame
+        fields = ('__all__')
+
+
+class PlugAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Plug
+        fields = ('__all__')
+
+
 class CollectionAdminForm(forms.ModelForm):
     description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
     class Meta:
         model = collection_models.Collection
-        fields = ('__all__')        
+        fields = ('__all__')    
 
 
 @admin.register(category_models.FirstLevelCategory)
@@ -97,6 +113,16 @@ class SwitchColorInline(admin.StackedInline):
     extra = 1
 
 
+class FrameColorInline(admin.StackedInline):
+    model = product_models.FrameColor
+    extra = 1
+
+
+class PlugColorInline(admin.StackedInline):
+    model = product_models.PlugColor
+    extra = 1
+
+
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -138,7 +164,7 @@ class SocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'socket_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'socket_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -173,13 +199,83 @@ class SwitchAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'switch_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'switch_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
         }),
         ('Технические характеристики', {
             'fields': ('control', 'frame_places', 'protection', 'backlight', 'material', 'equipment')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Frame)
+class FrameAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [FrameColorInline,]
+    form = FrameAdminForm
+
+    fieldsets = (
+        ('Основные', {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'frame_type')
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('frame_places', 'material', 'equipment')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Plug)
+class PlugAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'backlight',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [PlugColorInline,]
+    form = PlugAdminForm
+
+    fieldsets = (
+        ('Основные', {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'plug_type', 'montage', )
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('protection', 'backlight', 'peculiarities', 'material')
         }),
         ('Размеры', {
             'fields': ('width', 'height', 'depth')
