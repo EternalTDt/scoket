@@ -175,9 +175,9 @@ USE_TZ = True
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'socket-store',
-    'API_KEY': '568626483876866',
-    'API_SECRET': 'HaNqumhsH0zpQ-sffouwlQ1qgsM'
+    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET'),
 }
 
 STATIC_URL = '/static/'
