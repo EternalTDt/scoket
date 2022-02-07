@@ -98,8 +98,8 @@ DATABASES = {
     }
 }
 
-# db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -188,7 +188,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [STATIC_DIR]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
