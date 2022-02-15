@@ -231,7 +231,7 @@ class PlugColor(models.Model):
 
 # ComputerSocket
 
-class ComputerSocket(models.Model):
+class ComputerSocket(abstract_models.AbstractProduct):
     computer_socket_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='computer_socket_images', null=True, blank=True)
@@ -284,7 +284,7 @@ class ComputerSocketColor(models.Model):
 
 # Dimmer
 
-class Dimmer(models.Model):
+class Dimmer(abstract_models.AbstractProduct):
     dimmer_type = models.CharField("Тип", max_length=20)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='dimmer_images', null=True, blank=True)
@@ -344,18 +344,33 @@ class DimmerColor(models.Model):
 
 # Thermostat
 
-class Thermostat(models.Model):
+class Thermostat(abstract_models.AbstractProduct):
     thermostat_type = models.CharField("Тип", max_length=30)
+    is_smart_home_system_device = models.BooleanField("Устройство системы 'Умный дом'", default=False)
     appointment = models.CharField("Назначение", max_length=60)
     control = models.CharField("Управление", max_length=60)
     display = models.CharField("Экран", max_length=60)
     air_temperature_sensor = models.BooleanField("Датчик температуры воздуха", blank=True)
     floor_temperature_sensor = models.BooleanField("Датчик температуры пола", blank=True)
+    wi_fi_control = models.BooleanField("Управление через Wi-Fi", default=False, blank=True)
     remote_control = models.BooleanField("Пульт ДУ", blank=True)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='thermostat_images', null=True, blank=True)
     temperature_range = models.CharField("Диапазон температур", max_length=60)
-    remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика", default=3)
+    remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика, м.", default=3)
+    temperature_hysteresis = models.FloatField("Температурный гистерезис, °C", default=0)
+    maximum_load_current = models.IntegerField("Максимальный ток нагрузки, А", default=16)
+    maximum_load_power = models.IntegerField("Максимальная мощность нагрузки, Вт", default=3000)
+    correction_of_sensor_readings = models.IntegerField("Коррекция показаний датчика, °C", default=10)
+    sensor_connection_diagnostics = models.BooleanField("Диагностика подключения датчика", default=True)
+    protection_class = models.CharField("Класс защиты корпуса", max_length=20, default="IP20")
+    kids_protection = models.BooleanField("Защита от детей", default=False)
+    num_of_programs = models.IntegerField("Количество программ", default=0)
+    num_of_intervals_per_day = models.IntegerField("Количество интервалов в сутки", default=2)
+    adaptive_function = models.BooleanField("Адаптивная функция", default=True)
+    manual_mode = models.BooleanField("Ручной режим", default=True)
+    calculation_of_consumed_energy = models.BooleanField("Расчет потребленной энергии", default=True)
+
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -399,7 +414,7 @@ class ThermostatColor(models.Model):
 
 # NetworkFilter
 
-class NetworkFilter(models.Model):
+class NetworkFilter(abstract_models.AbstractProduct):
     network_filter_type = models.CharField("Тип", max_length=30)
     output_sockets = models.CharField("Выходные розетки", max_length=30)
     total_number_of_outlets = models.IntegerField("Общее количество выходных розеток", default=4)
@@ -408,15 +423,15 @@ class NetworkFilter(models.Model):
     power_cable = models.IntegerField("Кабель питания, м.", default=5)
     protective_shutters = models.BooleanField("Защитные шторки/крышки на розетках", default=False)
     separate_switches = models.BooleanField("Раздельные выключатели", default=False)
-    remote_control = models.BooleanField("Удаленное управление (Wi-Fi)", default=False)
+    remote_control_wi_fi = models.BooleanField("Удаленное управление (Wi-Fi)", default=False)
     nineteen_rack_mounting = models.BooleanField("Монтаж в 19' стойку", default=False)
     wall_mount = models.BooleanField("Крепление к стене", default=False)
-    rated_current = models.CharField("Номинальное входное напряжение", max_length=20)
-    max_input_pulse_energy = models.CharField("Макс. энергия входного импульса", max_length=20)
-    max_load_current = models.CharField("Макс. ток нагрузки", max_length=20)
+    rated_current = models.IntegerField("Номинальное входное напряжение, В", default=220)
+    max_input_pulse_energy = models.IntegerField("Макс. энергия входного импульса, Дж", default=125)
+    max_load_current = models.IntegerField("Макс. ток нагрузки, А", default=10)
     communication_line_protection = models.BooleanField("Защита линий связи", default=False)
     indication = models.CharField("Индикация", max_length=60)
-    usb_ports = models.CharField("Usb-порты", max_length=20, blank=True)
+    usb_ports = models.IntegerField("Usb-порты", default=0)
     overheat_protection = models.BooleanField("Защита от перегрева", default=False)
     load_short_circuit_protection = models.BooleanField("Защита от КЗ", default=False)
     over_voltage_protection = models.BooleanField("Защита от повышения напряжения", default=False)
@@ -443,7 +458,7 @@ class NetworkFilter(models.Model):
         app_label="shop"
 
 
-class ThermostatColor(models.Model):
+class NetworkFilterColor(models.Model):
     network_filter = models.ForeignKey(
         NetworkFilter,
         on_delete=models.CASCADE,
