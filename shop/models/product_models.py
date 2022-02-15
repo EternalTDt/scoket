@@ -229,6 +229,8 @@ class PlugColor(models.Model):
         app_label="shop"
 
 
+# ComputerSocket
+
 class ComputerSocket(models.Model):
     computer_socket_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
@@ -259,6 +261,28 @@ class ComputerSocket(models.Model):
         verbose_name_plural = "Компьютерные розетки"
         app_label="shop"
 
+
+class ComputerSocketColor(models.Model):
+    computer_socket = models.ForeignKey(
+        ComputerSocket,
+        on_delete=models.CASCADE,
+        verbose_name="Компьютерная розетка",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='computer_socket_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
+        app_label="shop"
+
+
+# Dimmer
 
 class Dimmer(models.Model):
     dimmer_type = models.CharField("Тип", max_length=20)
@@ -298,6 +322,28 @@ class Dimmer(models.Model):
         app_label="shop"
 
 
+class DimmerColor(models.Model):
+    dimmer = models.ForeignKey(
+        Dimmer,
+        on_delete=models.CASCADE,
+        verbose_name="Диммер",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='dimmer_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
+        app_label="shop"
+
+
+# Thermostat
+
 class Thermostat(models.Model):
     thermostat_type = models.CharField("Тип", max_length=30)
     appointment = models.CharField("Назначение", max_length=60)
@@ -330,6 +376,28 @@ class Thermostat(models.Model):
         verbose_name_plural = "Терморегуляторы"
         app_label="shop"
 
+
+class ThermostatColor(models.Model):
+    thermostat = models.ForeignKey(
+        Thermostat,
+        on_delete=models.CASCADE,
+        verbose_name="Терморегулятор",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='thermostat_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
+        app_label="shop"
+
+
+# NetworkFilter
 
 class NetworkFilter(models.Model):
     network_filter_type = models.CharField("Тип", max_length=30)
@@ -372,4 +440,24 @@ class NetworkFilter(models.Model):
     class Meta:
         verbose_name = "Сетевой фильтр"
         verbose_name_plural = "Сетевые фильтры"
+        app_label="shop"
+
+
+class ThermostatColor(models.Model):
+    network_filter = models.ForeignKey(
+        NetworkFilter,
+        on_delete=models.CASCADE,
+        verbose_name="Сетевой фильтр",
+        related_name='color',
+    )
+    color = models.CharField('Цвет', max_length=60)
+    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    image = models.ImageField('Изображение', upload_to='networkfilter_images')
+
+    def __str__(self) -> str:
+        return self.color
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвета"
         app_label="shop"
