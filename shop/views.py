@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.pagination import LimitOffsetPagination
 
 from .models import category_models
 from .models import brand_models
@@ -75,6 +76,7 @@ class BrandListView(generics.ListCreateAPIView):
     queryset = brand_models.Brand.objects.all()
     serializer_class = BrandSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
 
 
 class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -90,6 +92,7 @@ class CollectionListView(generics.ListCreateAPIView):
     queryset = collection_models.Collection.objects.all()
     serializer_class = CollectionSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
 
 
 class CollectionDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -120,6 +123,7 @@ class SocketListView(generics.ListCreateAPIView):
     queryset = product_models.Socket.objects.all()
     serializer_class = SocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
 
 
 class SocketDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -135,6 +139,7 @@ class SwitchListView(generics.ListCreateAPIView):
     queryset = product_models.Switch.objects.all()
     serializer_class = SwitchSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
 
 
 class SwitchDetailView(generics.RetrieveUpdateDestroyAPIView):

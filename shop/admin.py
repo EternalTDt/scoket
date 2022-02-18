@@ -202,6 +202,13 @@ class CollectionOfferAdmin(admin.ModelAdmin):
     inlines = [CollectionInline,]
 
 
+@admin.register(product_models.ProductOffer)
+class ProductOfferAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
 @admin.register(product_models.Socket)
 class SocketAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -216,8 +223,11 @@ class SocketAdmin(admin.ModelAdmin):
     form = SocketAdminForm
 
     fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+        }),
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'socket_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -251,8 +261,11 @@ class SwitchAdmin(admin.ModelAdmin):
     form = SwitchAdminForm
 
     fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+        }),
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'switch_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -286,8 +299,11 @@ class FrameAdmin(admin.ModelAdmin):
     form = FrameAdminForm
 
     fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+        }),
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'frame_type')
+            'fields': ('frame_type',)
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -322,7 +338,7 @@ class PlugAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
         }),
         ('Основные', {
             'fields': ('plug_type', 'montage', )
@@ -360,7 +376,7 @@ class ComputerSocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
         }),
         ('Основные', {
             'fields': ('computer_socket_type', 'montage', )
@@ -398,7 +414,7 @@ class DimmerAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
         }),
         ('Основные', {
             'fields': ('dimmer_type', 'montage', 'terminal')
@@ -448,7 +464,7 @@ class ThermostatAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
         }),
         ('Основные', {
             'fields': (
@@ -513,7 +529,7 @@ class NetworkFilterAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
         }),
         ('Основные', {
             'fields': (

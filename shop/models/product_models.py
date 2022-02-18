@@ -5,6 +5,17 @@ from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 
 
+class ProductOffer(models.Model):
+    name = models.CharField('Название', max_length=60)
+    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name = "Предложение для товаров"
+        verbose_name_plural = "Предложения для товаров"
+
 # Socket
 
 class Socket(abstract_models.AbstractProduct):
@@ -13,6 +24,14 @@ class Socket(abstract_models.AbstractProduct):
     terminal = models.CharField("Клемма", max_length=20)
     rated_current = models.CharField("Номинальный ток", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='socket_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='sockets', 
+        blank=True, 
+        null=True
+    )
 
     socket = models.CharField("Розетка", max_length=20)
     grounding = models.BooleanField("Заземление", default=True)
@@ -71,6 +90,14 @@ class Switch(abstract_models.AbstractProduct):
     montage = models.CharField("Монтаж", max_length=20)
     terminal = models.CharField("Клемма", max_length=20)
     rated_current = models.CharField("Номинальный ток", max_length=20)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='switches', 
+        blank=True, 
+        null=True
+    )
     
     thumbnail = models.ImageField("Изображение", upload_to='switch_images', null=True, blank=True)
     control = models.CharField("Управление", max_length=60)
@@ -129,6 +156,15 @@ class Frame(abstract_models.AbstractProduct):
     frame_type = models.CharField("Тип", max_length=40)
     frame_places = models.IntegerField("Количество мест в рамке", default=1)
     thumbnail = models.ImageField("Изображение", upload_to='frame_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='frames', 
+        blank=True, 
+        null=True
+    )
+
     material = models.CharField("Материал", max_length=20)
     equipment = models.CharField("Комплектация", max_length=60)
     width = models.IntegerField("Ширина", default=0)
@@ -181,6 +217,15 @@ class Plug(abstract_models.AbstractProduct):
     plug_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='plug_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='plugs', 
+        blank=True, 
+        null=True
+    )
+
     protection = models.CharField("Пылевлагозащищенность", max_length=20)
     backlight = models.BooleanField("Подсветка", default=False)
     peculiarities = models.CharField("Особенности", max_length=60)
@@ -235,6 +280,15 @@ class ComputerSocket(abstract_models.AbstractProduct):
     computer_socket_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='computer_socket_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='computer_sockets', 
+        blank=True, 
+        null=True
+    )
+
     rated_current = models.CharField("Номинальный ток", max_length=20)
     socket = models.CharField("Розетка", max_length=20)
     grounding = models.BooleanField("Заземление", default=True)
@@ -288,6 +342,15 @@ class Dimmer(abstract_models.AbstractProduct):
     dimmer_type = models.CharField("Тип", max_length=20)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='dimmer_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='dimmers', 
+        blank=True, 
+        null=True
+    )
+
     terminal = models.CharField("Клемма", max_length=20)
     grounding = models.BooleanField("Заземление", default=True)
     three_phase_socket = models.BooleanField("Трехфазная розетка", default=False)
@@ -356,6 +419,15 @@ class Thermostat(abstract_models.AbstractProduct):
     remote_control = models.BooleanField("Пульт ДУ", blank=True)
     montage = models.CharField("Монтаж", max_length=20)
     thumbnail = models.ImageField("Изображение", upload_to='thermostat_images', null=True, blank=True)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='thermostats', 
+        blank=True, 
+        null=True
+    )
+
     temperature_range = models.CharField("Диапазон температур", max_length=60)
     remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика, м.", default=3)
     temperature_hysteresis = models.FloatField("Температурный гистерезис, °C", default=0)
@@ -419,6 +491,15 @@ class NetworkFilter(abstract_models.AbstractProduct):
     output_sockets = models.CharField("Выходные розетки", max_length=30)
     total_number_of_outlets = models.IntegerField("Общее количество выходных розеток", default=4)
     input_socket = models.CharField("Входная розетка", max_length=30)
+    product_offer = models.ForeignKey(
+        ProductOffer, 
+        on_delete=models.CASCADE, 
+        verbose_name="Предложение", 
+        related_name='network_filters', 
+        blank=True, 
+        null=True
+    )
+
     avr = models.BooleanField("Автоматическая стабилизация напряжения", default=False)
     power_cable = models.IntegerField("Кабель питания, м.", default=5)
     protective_shutters = models.BooleanField("Защитные шторки/крышки на розетках", default=False)
