@@ -224,7 +224,7 @@ class SocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
@@ -262,7 +262,7 @@ class SwitchAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
@@ -300,7 +300,7 @@ class FrameAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('frame_type',)
@@ -338,7 +338,7 @@ class PlugAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('plug_type', 'montage', )
@@ -376,7 +376,7 @@ class ComputerSocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('computer_socket_type', 'montage', )
@@ -414,7 +414,7 @@ class DimmerAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': ('dimmer_type', 'montage', 'terminal')
@@ -464,7 +464,7 @@ class ThermostatAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': (
@@ -529,7 +529,7 @@ class NetworkFilterAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
         }),
         ('Основные', {
             'fields': (

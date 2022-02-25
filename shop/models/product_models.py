@@ -1,8 +1,8 @@
-from statistics import mode
 from django.db import models
 from . import abstract_models
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
+from .category_models import ThirdLevelCategory
 
 
 class ProductOffer(models.Model):
@@ -31,6 +31,14 @@ class Socket(abstract_models.AbstractProduct):
         related_name='sockets', 
         blank=True, 
         null=True
+    )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='sockets',
+        blank=True,
+        null=True,
     )
 
     socket = models.CharField("Розетка", max_length=20)
@@ -98,6 +106,14 @@ class Switch(abstract_models.AbstractProduct):
         blank=True, 
         null=True
     )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='switches',
+        blank=True,
+        null=True,
+    )
     
     thumbnail = models.ImageField("Изображение", upload_to='switch_images', null=True, blank=True)
     control = models.CharField("Управление", max_length=60)
@@ -164,6 +180,14 @@ class Frame(abstract_models.AbstractProduct):
         blank=True, 
         null=True
     )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='frames',
+        blank=True,
+        null=True,
+    )
 
     material = models.CharField("Материал", max_length=20)
     equipment = models.CharField("Комплектация", max_length=60)
@@ -224,6 +248,14 @@ class Plug(abstract_models.AbstractProduct):
         related_name='plugs', 
         blank=True, 
         null=True
+    )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='plugs',
+        blank=True,
+        null=True,
     )
 
     protection = models.CharField("Пылевлагозащищенность", max_length=20)
@@ -288,6 +320,14 @@ class ComputerSocket(abstract_models.AbstractProduct):
         blank=True, 
         null=True
     )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='computer_sockets',
+        blank=True,
+        null=True,
+    )
 
     rated_current = models.CharField("Номинальный ток", max_length=20)
     socket = models.CharField("Розетка", max_length=20)
@@ -349,6 +389,14 @@ class Dimmer(abstract_models.AbstractProduct):
         related_name='dimmers', 
         blank=True, 
         null=True
+    )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='dimmers',
+        blank=True,
+        null=True,
     )
 
     terminal = models.CharField("Клемма", max_length=20)
@@ -427,6 +475,14 @@ class Thermostat(abstract_models.AbstractProduct):
         blank=True, 
         null=True
     )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='thermostats',
+        blank=True,
+        null=True,
+    )
 
     temperature_range = models.CharField("Диапазон температур", max_length=60)
     remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика, м.", default=3)
@@ -498,6 +554,14 @@ class NetworkFilter(abstract_models.AbstractProduct):
         related_name='network_filters', 
         blank=True, 
         null=True
+    )
+    category = models.ForeignKey(
+        ThirdLevelCategory,
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+        related_name='network_filters',
+        blank=True,
+        null=True,
     )
 
     avr = models.BooleanField("Автоматическая стабилизация напряжения", default=False)

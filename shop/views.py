@@ -19,6 +19,12 @@ from .serializers import (
 
     SocketSerializer,
     SwitchSerializer,
+    FrameSerializer,
+    PlugSerializer,
+    ComputerSocketSerializer,
+    DimmerSerializer,
+    ThermostatSerializer,
+    NetworkFilterSerializer,
 )
 
 
@@ -145,5 +151,101 @@ class SwitchListView(generics.ListCreateAPIView):
 class SwitchDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = product_models.Switch.objects.all()
     serializer_class = SwitchSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Frame
+
+class FrameListView(generics.ListCreateAPIView):
+    queryset = product_models.Frame.objects.all()
+    serializer_class = FrameSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class FrameDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Frame.objects.all()
+    serializer_class = FrameSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Plug
+
+class PlugListView(generics.ListCreateAPIView):
+    queryset = product_models.Plug.objects.all()
+    serializer_class = PlugSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class PlugDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Plug.objects.all()
+    serializer_class = PlugSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Computer Socket
+
+class ComputerSocketListView(generics.ListCreateAPIView):
+    queryset = product_models.ComputerSocket.objects.all()
+    serializer_class = ComputerSocketSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class ComputerSocketDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.ComputerSocket.objects.all()
+    serializer_class = ComputerSocketSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Dimmer
+
+class DimmerListView(generics.ListCreateAPIView):
+    queryset = product_models.Dimmer.objects.all()
+    serializer_class = DimmerSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class DimmerDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Dimmer.objects.all()
+    serializer_class = DimmerSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Thermostat
+
+class ThermostatListView(generics.ListCreateAPIView):
+    queryset = product_models.Thermostat.objects.all()
+    serializer_class = ThermostatSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class ThermostatDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.Thermostat.objects.all()
+    serializer_class = ThermostatSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# Network Filter
+
+class NetworkFilterListView(generics.ListCreateAPIView):
+    queryset = product_models.NetworkFilter.objects.all()
+    serializer_class = NetworkFilterSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = LimitOffsetPagination
+
+
+class NetworkFilterDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = product_models.NetworkFilter.objects.all()
+    serializer_class = NetworkFilterSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
