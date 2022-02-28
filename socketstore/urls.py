@@ -12,9 +12,9 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('api/', include('shop.urls')),
-    path('api/', include('mainpage.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/shop/', include('shop.urls')),
+    path('api/mainpage/', include('mainpage.urls')),
+]
 
 
 urlpatterns += doc_urls

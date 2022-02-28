@@ -1,3 +1,4 @@
+from calendar import c
 from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -32,12 +33,60 @@ class SwitchAdminForm(forms.ModelForm):
         fields = ('__all__')    
 
 
+class FrameAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Frame
+        fields = ('__all__')
+
+
+class PlugAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Plug
+        fields = ('__all__')
+
+
+class ComputerSocketAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.ComputerSocket
+        fields = ('__all__')
+
+
+class DimmerAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Dimmer
+        fields = ('__all__')
+
+
+class ThermostatAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.Thermostat
+        fields = ('__all__')
+
+
+class NetworkFilterAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = product_models.NetworkFilter
+        fields = ('__all__')
+
+
 class CollectionAdminForm(forms.ModelForm):
     description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
     class Meta:
         model = collection_models.Collection
-        fields = ('__all__')        
+        fields = ('__all__')    
 
 
 @admin.register(category_models.FirstLevelCategory)
@@ -97,6 +146,36 @@ class SwitchColorInline(admin.StackedInline):
     extra = 1
 
 
+class FrameColorInline(admin.StackedInline):
+    model = product_models.FrameColor
+    extra = 1
+
+
+class PlugColorInline(admin.StackedInline):
+    model = product_models.PlugColor
+    extra = 1
+
+
+class ComputerSocketColorInline(admin.StackedInline):
+    model = product_models.ComputerSocketColor
+    extra = 1
+
+
+class DimmerColorInline(admin.StackedInline):
+    model = product_models.DimmerColor
+    extra = 1
+
+
+class ThermostatColorInline(admin.StackedInline):
+    model = product_models.ThermostatColor
+    extra = 1
+
+
+class NetworkFilterColorInline(admin.StackedInline):
+    model = product_models.NetworkFilterColor
+    extra = 1
+
+
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -123,6 +202,13 @@ class CollectionOfferAdmin(admin.ModelAdmin):
     inlines = [CollectionInline,]
 
 
+@admin.register(product_models.ProductOffer)
+class ProductOfferAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
 @admin.register(product_models.Socket)
 class SocketAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -137,8 +223,11 @@ class SocketAdmin(admin.ModelAdmin):
     form = SocketAdminForm
 
     fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'socket_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -172,8 +261,11 @@ class SwitchAdmin(admin.ModelAdmin):
     form = SwitchAdminForm
 
     fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
         ('Основные', {
-            'fields': ('name', 'slug', 'code', 'description', 'thumbnail', 'switch_type', 'montage', 'terminal', 'rated_current')
+            'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
         }),
         ('Информацмонные', {
             'fields': ('price', 'stock', 'availability')
@@ -183,6 +275,279 @@ class SwitchAdmin(admin.ModelAdmin):
         }),
         ('Размеры', {
             'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Frame)
+class FrameAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [FrameColorInline,]
+    form = FrameAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': ('frame_type',)
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('frame_places', 'material', 'equipment')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Plug)
+class PlugAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'backlight',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [PlugColorInline,]
+    form = PlugAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': ('plug_type', 'montage', )
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('protection', 'backlight', 'peculiarities', 'material')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.ComputerSocket)
+class ComputerSocketAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'grounding', 'kids_protection',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [ComputerSocketColorInline,]
+    form = ComputerSocketAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': ('computer_socket_type', 'montage', )
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': ('socket', 'rated_current', 'grounding', 'protection', 'kids_protection', 'material')
+        }),
+        ('Размеры', {
+            'fields': ('width', 'height', 'depth')
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Dimmer)
+class DimmerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = ('availability', 'grounding', 'kids_protection', 'backlight',)
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [DimmerColorInline,]
+    form = DimmerAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': ('dimmer_type', 'montage', 'terminal')
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': (
+                'grounding', 'three_phase_socket', 'control', 'protection', 
+                'kids_protection', 'backlight', 'peculiarities', 'material', 'equipment'
+                )
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.Thermostat)
+class ThermostatAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = (
+        'availability',
+        'is_smart_home_system_device',
+        'air_temperature_sensor',
+        'floor_temperature_sensor',
+        'wi_fi_control',
+        'remote_control',
+        'sensor_connection_diagnostics',
+        'kids_protection',
+        'adaptive_function',
+        'manual_mode',
+        'calculation_of_consumed_energy',
+    )
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [ThermostatColorInline,]
+    form = ThermostatAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': (
+                'thermostat_type', 'appointment', 'control', 'display', 'wi_fi_control',
+                'air_temperature_sensor','floor_temperature_sensor', 'remote_control', 'montage',
+            )
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': (
+                'temperature_range', 'temperature_hysteresis', 'remote_sensor_wire_length', 
+                'maximum_load_current', 'maximum_load_power', 'correction_of_sensor_readings', 'sensor_connection_diagnostics', 
+                'protection_class'
+            )
+        }),
+        ('Программные функции', {
+            'fields': (
+                'num_of_programs', 
+                'num_of_intervals_per_day', 
+                'adaptive_function', 
+                'manual_mode', 
+                'calculation_of_consumed_energy',
+                'kids_protection'
+            )
+        }),
+    )
+
+    def thumbnail_preview(self, obj):
+            return obj.thumbnail_preview
+
+    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.allow_tags = True
+
+
+@admin.register(product_models.NetworkFilter)
+class NetworkFilterAdmin(admin.ModelAdmin):
+    list_display = ('name', 'thumbnail_preview',)
+    list_filter = (
+        'availability', 
+        'avr', 
+        'protective_shutters', 
+        'separate_switches', 
+        'remote_control',
+        'nineteen_rack_mounting',
+        'wall_mount',
+        'communication_line_protection',
+        'overheat_protection',
+        'load_short_circuit_protection',
+        'over_voltage_protection',
+        'remote_control_wi_fi',
+    )
+    readonly_fields = ('thumbnail_preview',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+    save_on_top = True
+    save_as = True
+    inlines = [NetworkFilterColorInline,]
+    form = NetworkFilterAdminForm
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+        }),
+        ('Основные', {
+            'fields': (
+                'network_filter_type', 'output_sockets', 'total_number_of_outlets',
+                'input_socket', 'avr', 'power_cable', 'protective_shutters', 'separate_switches',
+                'remote_control_wi_fi', 'nineteen_rack_mounting', 'wall_mount'
+            )
+        }),
+        ('Информацмонные', {
+            'fields': ('price', 'stock', 'availability')
+        }),
+        ('Технические характеристики', {
+            'fields': (
+                'rated_current', 'max_input_pulse_energy', 'max_load_current',
+                'communication_line_protection', 'indication', 'usb_ports', 
+                'overheat_protection', 'load_short_circuit_protection',
+                'over_voltage_protection', 'remote_control'
+                )
         }),
     )
 

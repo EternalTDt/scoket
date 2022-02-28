@@ -7,13 +7,13 @@ from .serializers import OfferSliderSerializer, CurrenPromotionsSliderSerializer
 
 # Offers slider
 
-class OffersSliderListView(generics.ListCreateAPIView):
+class OffersSliderListView(generics.ListAPIView):
     queryset = OffersSlider.objects.all()
     serializer_class = OfferSliderSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class OffersSliderDetailView(generics.RetrieveUpdateDestroyAPIView):
+class OffersSliderDetailView(generics.RetrieveAPIView):
     queryset = OffersSlider.objects.all()
     serializer_class = OfferSliderSerializer
     lookup_field = 'slug'
@@ -22,13 +22,13 @@ class OffersSliderDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Current promotions slider
 
-class CurrenPromotionsSliderListView(generics.ListCreateAPIView):
+class CurrenPromotionsSliderListView(generics.ListAPIView):
     queryset = CurrenPromotionsSlider.objects.all()
     serializer_class = CurrenPromotionsSliderSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class CurrenPromotionsSliderDetailView(generics.RetrieveUpdateDestroyAPIView):
+class CurrenPromotionsSliderDetailView(generics.RetrieveAPIView):
     queryset = CurrenPromotionsSlider.objects.all()
     serializer_class = CurrenPromotionsSliderSerializer
     lookup_field = 'slug'

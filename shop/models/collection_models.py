@@ -11,8 +11,8 @@ class CollectionOffer(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Предложение"
-        verbose_name_plural = "Предложения"
+        verbose_name = "Предложение для коллекций"
+        verbose_name_plural = "Предложения для коллекций"
 
 
 class Collection(abstract_models.AbstractCollection):
