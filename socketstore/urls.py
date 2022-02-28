@@ -12,8 +12,8 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('api/', include('shop.urls')),
-    path('api/', include('mainpage.urls')),
+    path('api/shop/', include('shop.urls')),
+    path('api/mainpage/', include('mainpage.urls')),
 ]
 
 

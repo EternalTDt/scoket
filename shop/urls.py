@@ -58,22 +58,27 @@ urlpatterns = [
     path('collection/<slug:slug>/', CollectionDetailView.as_view(), name='collection-detail'),
     path('collection-offer/', CollectionOfferListView.as_view(), name='collection-offer'),
     path('collection-offer/<slug:slug>/', CollectionOfferDetailView.as_view(), name='collection-offer-detail'),
-    path('product/socket/', SocketListView.as_view(), name="socket"),
-    path('product/socket/<slug:slug>/', SocketDetailView.as_view(), name="socket-detail"),
-    path('product/switch/', SwitchListView.as_view(), name="switch"),
-    path('product/switch/<slug:slug>/', SwitchDetailView.as_view(), name="switch-detail"),
-    path('product/frame/', FrameListView.as_view(), name="frame"),
-    path('product/frame/<slug:slug>/', FrameDetailView.as_view(), name="frame-detail"),
-    path('product/plug/', PlugListView.as_view(), name="plug"),
-    path('product/plug/<slug:slug>/', PlugDetailView.as_view(), name="plug-detail"),
-    path('product/computer-socket/', ComputerSocketListView.as_view(), name="computer-socket"),
-    path('product/computer-socket/<slug:slug>/', ComputerSocketDetailView.as_view(), name="computer-socket-detail"),
-    path('product/dimmer/', DimmerListView.as_view(), name="dimmer"),
-    path('product/dimmer/<slug:slug>/', DimmerDetailView.as_view(), name="dimmer-detail"),
-    path('product/thermostat/', ThermostatListView.as_view(), name="thermostat"),
-    path('product/thermostat/<slug:slug>/', ThermostatDetailView.as_view(), name="thermostat-detail"),
-    path('product/network-filter/', NetworkFilterListView.as_view(), name="network-filter"),
-    path('product/network-filter/<slug:slug>/', NetworkFilterDetailView.as_view(), name="network-filter-detail"),
 ]
+
+urlpatterns_product = [
+    path('socket/', SocketListView.as_view(), name="socket"),
+    path('socket/<slug:slug>/', SocketDetailView.as_view(), name="socket-detail"),
+    path('switch/', SwitchListView.as_view(), name="switch"),
+    path('switch/<slug:slug>/', SwitchDetailView.as_view(), name="switch-detail"),
+    path('frame/', FrameListView.as_view(), name="frame"),
+    path('frame/<slug:slug>/', FrameDetailView.as_view(), name="frame-detail"),
+    path('plug/', PlugListView.as_view(), name="plug"),
+    path('plug/<slug:slug>/', PlugDetailView.as_view(), name="plug-detail"),
+    path('computer-socket/', ComputerSocketListView.as_view(), name="computer-socket"),
+    path('computer-socket/<slug:slug>/', ComputerSocketDetailView.as_view(), name="computer-socket-detail"),
+    path('dimmer/', DimmerListView.as_view(), name="dimmer"),
+    path('dimmer/<slug:slug>/', DimmerDetailView.as_view(), name="dimmer-detail"),
+    path('thermostat/', ThermostatListView.as_view(), name="thermostat"),
+    path('thermostat/<slug:slug>/', ThermostatDetailView.as_view(), name="thermostat-detail"),
+    path('network-filter/', NetworkFilterListView.as_view(), name="network-filter"),
+    path('network-filter/<slug:slug>/', NetworkFilterDetailView.as_view(), name="network-filter-detail"),
+]
+
+urlpatterns += urlpatterns_product
 
 # urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json'])

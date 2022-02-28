@@ -16,4 +16,4 @@ urlpatterns = [
     path('current-promotions-slider/<slug:slug>', CurrenPromotionsSliderDetailView.as_view(), name="current-promotions-slider-detail"),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json'])
+# urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json'])

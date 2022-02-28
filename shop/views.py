@@ -31,13 +31,13 @@ from .serializers import (
 #  FirstLevelCategory
 
 
-class FirstLevelCategoryListView(generics.ListCreateAPIView):
+class FirstLevelCategoryListView(generics.ListAPIView):
     queryset = category_models.FirstLevelCategory.objects.all()
     serializer_class = FirstLevelCategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class FirstLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+class FirstLevelCategoryDetailView(generics.RetrieveAPIView):
     queryset = category_models.FirstLevelCategory.objects.all()
     serializer_class = FirstLevelCategorySerializer
     lookup_field = 'slug'
@@ -47,13 +47,13 @@ class FirstLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 # SecondLevelCategory
 
 
-class SecondLevelCategoryListView(generics.ListCreateAPIView):
+class SecondLevelCategoryListView(generics.ListAPIView):
     queryset = category_models.SecondLevelCategory.objects.all()
     serializer_class = SecondLevelCategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class SecondLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+class SecondLevelCategoryDetailView(generics.RetrieveAPIView):
     queryset = category_models.SecondLevelCategory.objects.all()
     serializer_class = SecondLevelCategorySerializer
     lookup_field = 'slug'
@@ -63,13 +63,13 @@ class SecondLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 # ThirdLevelCategory
 
 
-class ThirdLevelCategoryListView(generics.ListCreateAPIView):
+class ThirdLevelCategoryListView(generics.ListAPIView):
     queryset = category_models.ThirdLevelCategory.objects.all()
     serializer_class = ThirdLevelCategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class ThirdLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ThirdLevelCategoryDetailView(generics.RetrieveAPIView):
     queryset = category_models.ThirdLevelCategory.objects.all()
     serializer_class = ThirdLevelCategorySerializer
     lookup_field = 'slug'
@@ -78,14 +78,14 @@ class ThirdLevelCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Brand
 
-class BrandListView(generics.ListCreateAPIView):
+class BrandListView(generics.ListAPIView):
     queryset = brand_models.Brand.objects.all()
     serializer_class = BrandSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
+class BrandDetailView(generics.RetrieveAPIView):
     queryset = brand_models.Brand.objects.all()
     serializer_class = BrandSerializer
     lookup_field = 'slug'
@@ -94,14 +94,14 @@ class BrandDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Collection
 
-class CollectionListView(generics.ListCreateAPIView):
+class CollectionListView(generics.ListAPIView):
     queryset = collection_models.Collection.objects.all()
     serializer_class = CollectionSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class CollectionDetailView(generics.RetrieveUpdateDestroyAPIView):
+class CollectionDetailView(generics.RetrieveAPIView):
     queryset = collection_models.Collection.objects.all()
     serializer_class = CollectionSerializer
     lookup_field = 'slug'
@@ -110,13 +110,13 @@ class CollectionDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Collection offer
 
-class CollectionOfferListView(generics.ListCreateAPIView):
+class CollectionOfferListView(generics.ListAPIView):
     queryset = collection_models.CollectionOffer.objects.all()
     serializer_class = CollectionOfferSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class CollectionOfferDetailView(generics.RetrieveUpdateDestroyAPIView):
+class CollectionOfferDetailView(generics.RetrieveAPIView):
     queryset = collection_models.CollectionOffer.objects.all()
     serializer_class = CollectionOfferSerializer
     lookup_field = 'slug'
@@ -125,14 +125,14 @@ class CollectionOfferDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Socket
 
-class SocketListView(generics.ListCreateAPIView):
+class SocketListView(generics.ListAPIView):
     queryset = product_models.Socket.objects.all()
     serializer_class = SocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class SocketDetailView(generics.RetrieveUpdateDestroyAPIView):
+class SocketDetailView(generics.RetrieveAPIView):
     queryset = product_models.Socket.objects.all()
     serializer_class = SocketSerializer
     lookup_field = 'slug'
@@ -141,14 +141,14 @@ class SocketDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Switch
 
-class SwitchListView(generics.ListCreateAPIView):
+class SwitchListView(generics.ListAPIView):
     queryset = product_models.Switch.objects.all()
     serializer_class = SwitchSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class SwitchDetailView(generics.RetrieveUpdateDestroyAPIView):
+class SwitchDetailView(generics.RetrieveAPIView):
     queryset = product_models.Switch.objects.all()
     serializer_class = SwitchSerializer
     lookup_field = 'slug'
@@ -157,14 +157,14 @@ class SwitchDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Frame
 
-class FrameListView(generics.ListCreateAPIView):
+class FrameListView(generics.ListAPIView):
     queryset = product_models.Frame.objects.all()
     serializer_class = FrameSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class FrameDetailView(generics.RetrieveUpdateDestroyAPIView):
+class FrameDetailView(generics.RetrieveAPIView):
     queryset = product_models.Frame.objects.all()
     serializer_class = FrameSerializer
     lookup_field = 'slug'
@@ -173,14 +173,14 @@ class FrameDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Plug
 
-class PlugListView(generics.ListCreateAPIView):
+class PlugListView(generics.ListAPIView):
     queryset = product_models.Plug.objects.all()
     serializer_class = PlugSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class PlugDetailView(generics.RetrieveUpdateDestroyAPIView):
+class PlugDetailView(generics.RetrieveAPIView):
     queryset = product_models.Plug.objects.all()
     serializer_class = PlugSerializer
     lookup_field = 'slug'
@@ -189,14 +189,14 @@ class PlugDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Computer Socket
 
-class ComputerSocketListView(generics.ListCreateAPIView):
+class ComputerSocketListView(generics.ListAPIView):
     queryset = product_models.ComputerSocket.objects.all()
     serializer_class = ComputerSocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class ComputerSocketDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ComputerSocketDetailView(generics.RetrieveAPIView):
     queryset = product_models.ComputerSocket.objects.all()
     serializer_class = ComputerSocketSerializer
     lookup_field = 'slug'
@@ -205,14 +205,14 @@ class ComputerSocketDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Dimmer
 
-class DimmerListView(generics.ListCreateAPIView):
+class DimmerListView(generics.ListAPIView):
     queryset = product_models.Dimmer.objects.all()
     serializer_class = DimmerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class DimmerDetailView(generics.RetrieveUpdateDestroyAPIView):
+class DimmerDetailView(generics.RetrieveAPIView):
     queryset = product_models.Dimmer.objects.all()
     serializer_class = DimmerSerializer
     lookup_field = 'slug'
@@ -221,14 +221,14 @@ class DimmerDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Thermostat
 
-class ThermostatListView(generics.ListCreateAPIView):
+class ThermostatListView(generics.ListAPIView):
     queryset = product_models.Thermostat.objects.all()
     serializer_class = ThermostatSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class ThermostatDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ThermostatDetailView(generics.RetrieveAPIView):
     queryset = product_models.Thermostat.objects.all()
     serializer_class = ThermostatSerializer
     lookup_field = 'slug'
@@ -237,14 +237,14 @@ class ThermostatDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 # Network Filter
 
-class NetworkFilterListView(generics.ListCreateAPIView):
+class NetworkFilterListView(generics.ListAPIView):
     queryset = product_models.NetworkFilter.objects.all()
     serializer_class = NetworkFilterSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
 
-class NetworkFilterDetailView(generics.RetrieveUpdateDestroyAPIView):
+class NetworkFilterDetailView(generics.RetrieveAPIView):
     queryset = product_models.NetworkFilter.objects.all()
     serializer_class = NetworkFilterSerializer
     lookup_field = 'slug'
