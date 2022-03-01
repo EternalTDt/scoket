@@ -58,7 +58,7 @@ class CollectionColorSerializer(serializers.ModelSerializer):
 
 
 class CollectionOfferSerializer(serializers.ModelSerializer):
-    collection = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    collection = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
 
     class Meta:
         model = collection_models.CollectionOffer
