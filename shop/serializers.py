@@ -58,6 +58,8 @@ class CollectionColorSerializer(serializers.ModelSerializer):
 
 
 class CollectionOfferSerializer(serializers.ModelSerializer):
+    collection = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = collection_models.CollectionOffer
         fields = ('__all__')
