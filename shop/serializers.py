@@ -6,11 +6,12 @@ from .models import collection_models
 from .models import product_models
 
 
-# First Level Category
+# Third Level Category
 
-class FirstLevelCategorySerializer(serializers.ModelSerializer):
+class ThirdLevelCategorySerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = category_models.FirstLevelCategory
+        model = category_models.ThirdLevelCategory
         fields = ('__all__')
         lookup_field = 'slug'
 
@@ -19,7 +20,7 @@ class FirstLevelCategorySerializer(serializers.ModelSerializer):
 
 class SecondLevelCategorySerializer(serializers.ModelSerializer):
 
-    category = FirstLevelCategorySerializer()
+    category = ThirdLevelCategorySerializer(many=True)
 
     class Meta:
         model = category_models.SecondLevelCategory
@@ -27,14 +28,13 @@ class SecondLevelCategorySerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
-# Third Level Category
+# First Level Category
 
-class ThirdLevelCategorySerializer(serializers.ModelSerializer):
-
-    category = SecondLevelCategorySerializer()
+class FirstLevelCategorySerializer(serializers.ModelSerializer):
+    category = SecondLevelCategorySerializer(many=True)
 
     class Meta:
-        model = category_models.ThirdLevelCategory
+        model = category_models.FirstLevelCategory
         fields = ('__all__')
         lookup_field = 'slug'
 

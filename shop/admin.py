@@ -94,25 +94,27 @@ class FirstLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
+    list_filter = ('category',)
+    autocomplete_fields = ['category',]
     prepopulated_fields = {'slug': ('name',)}
     save_as = True
 
 
 @admin.register(category_models.SecondLevelCategory)
 class SecondLevelCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category',)
+    list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name', 'category__name')
     list_filter = ('category',)
+    autocomplete_fields = ['category',]
     prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(category_models.ThirdLevelCategory)
 class ThirdLevelCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category',)
+    list_display = ('name',)
     list_display_links = ('name',)
-    search_fields = ('name', 'category__name')
-    list_filter = ('category',)
+    search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
 
 
