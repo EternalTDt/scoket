@@ -1,4 +1,3 @@
-from cgitb import lookup
 from rest_framework import serializers
 from .models import category_models
 from .models import brand_models
