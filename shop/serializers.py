@@ -75,6 +75,13 @@ class CollectionSerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
+class ProductOfferSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = product_models.ProductOffer
+        fields = ('__all__')
+        lookup_field = 'slug'
+
+
 # Socket
 
 class SocketColorSerializer(serializers.ModelSerializer):
@@ -87,6 +94,8 @@ class SocketColorSerializer(serializers.ModelSerializer):
 class SocketSerializer(serializers.ModelSerializer):
     color = CollectionColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Socket
@@ -106,6 +115,8 @@ class SwitchColorSerializer(serializers.ModelSerializer):
 class SwitchSerializer(serializers.ModelSerializer):
     color = SwitchColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Switch
@@ -125,6 +136,8 @@ class FrameColorSerializer(serializers.ModelSerializer):
 class FrameSerializer(serializers.ModelSerializer):
     color = FrameColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Frame
@@ -144,6 +157,8 @@ class PlugColorSerializer(serializers.ModelSerializer):
 class PlugSerializer(serializers.ModelSerializer):
     color = PlugColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Plug
@@ -163,6 +178,8 @@ class ComputerSocketColorSerializer(serializers.ModelSerializer):
 class ComputerSocketSerializer(serializers.ModelSerializer):
     color = ComputerSocketColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.ComputerSocket()
@@ -182,6 +199,8 @@ class DimmerColorSerializer(serializers.ModelSerializer):
 class DimmerSerializer(serializers.ModelSerializer):
     color = DimmerColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Dimmer()
@@ -201,6 +220,8 @@ class ThermostatColorSerializer(serializers.ModelSerializer):
 class ThermostatSerializer(serializers.ModelSerializer):
     color = ThermostatColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.Thermostat()
@@ -220,6 +241,8 @@ class NetworkFilterColorSerializer(serializers.ModelSerializer):
 class NetworkFilterSerializer(serializers.ModelSerializer):
     color = NetworkFilterColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
+    collection = CollectionSerializer()
+    product_offer = ProductOfferSerializer()
 
     class Meta:
         model = product_models.NetworkFilter()

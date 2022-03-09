@@ -17,6 +17,8 @@ from .serializers import (
     CollectionSerializer,
     CollectionOfferSerializer,
 
+    ProductOfferSerializer,
+
     SocketSerializer,
     SwitchSerializer,
     FrameSerializer,
@@ -122,6 +124,20 @@ class CollectionOfferDetailView(generics.RetrieveAPIView):
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+
+# Product offer
+
+class ProductOfferListView(generics.ListAPIView):
+    queryset = product_models.ProductOffer.objects.all()
+    serializer_class = ProductOfferSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly] 
+
+
+class ProductOfferDetailView(generics.RetrieveAPIView):
+    queryset = product_models.ProductOffer.objects.all()
+    serializer_class = ProductOfferSerializer
+    lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 # Socket
 

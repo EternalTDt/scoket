@@ -223,10 +223,11 @@ class SocketAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [SocketColorInline,]
     form = SocketAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
@@ -261,10 +262,11 @@ class SwitchAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [SwitchColorInline,]
     form = SwitchAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
