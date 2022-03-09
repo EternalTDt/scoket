@@ -94,25 +94,27 @@ class FirstLevelCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
+    list_filter = ('category',)
+    autocomplete_fields = ['category',]
     prepopulated_fields = {'slug': ('name',)}
     save_as = True
 
 
 @admin.register(category_models.SecondLevelCategory)
 class SecondLevelCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category',)
+    list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name', 'category__name')
     list_filter = ('category',)
+    autocomplete_fields = ['category',]
     prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(category_models.ThirdLevelCategory)
 class ThirdLevelCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category',)
+    list_display = ('name',)
     list_display_links = ('name',)
-    search_fields = ('name', 'category__name')
-    list_filter = ('category',)
+    search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -221,10 +223,11 @@ class SocketAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [SocketColorInline,]
     form = SocketAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
@@ -259,10 +262,11 @@ class SwitchAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [SwitchColorInline,]
     form = SwitchAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
@@ -297,10 +301,11 @@ class FrameAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [FrameColorInline,]
     form = FrameAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('frame_type',)
@@ -335,10 +340,11 @@ class PlugAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [PlugColorInline,]
     form = PlugAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('plug_type', 'montage', )
@@ -373,10 +379,11 @@ class ComputerSocketAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [ComputerSocketColorInline,]
     form = ComputerSocketAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('computer_socket_type', 'montage', )
@@ -411,10 +418,11 @@ class DimmerAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [DimmerColorInline,]
     form = DimmerAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('dimmer_type', 'montage', 'terminal')
@@ -461,10 +469,11 @@ class ThermostatAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [ThermostatColorInline,]
     form = ThermostatAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': (
@@ -526,10 +535,11 @@ class NetworkFilterAdmin(admin.ModelAdmin):
     save_as = True
     inlines = [NetworkFilterColorInline,]
     form = NetworkFilterAdminForm
+    autocomplete_fields = ['category', 'collection']
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': (

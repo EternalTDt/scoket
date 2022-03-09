@@ -1,15 +1,30 @@
-FROM python:3.8.5-alpine
+# using ubuntu LTS version
+FROM ubuntu:20.04 AS builder-image
 
-ENV PYTHONUNBUFFERED 1
-COPY ./requirements.txt /requirements.txt
+# avoid stuck build due to user prompt
+ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apk add --update --no-cache postgresql-client jpeg-dev
+RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3.9-dev python3.9-venv python3-pip python3-wheel build-essential && \
+	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apk add --update --no-cache --virtual .tmp-build-deps \ 
-    gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
-RUN pip install -r /requirements.txt
-RUN apk del .tmp-build-deps
+# create and activate virtual environment
+# using final folder name to avoid path issues with packages
+RUN python3.9 -m venv /home/myuser/venv
+ENV PATH="/home/myuser/venv/bin:$PATH"
 
-RUN mkdir /socket_store
-COPY . ./socket_store
-WORKDIR /socket_store
+# install requirements
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir wheel
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+FROM ubuntu:20.04 AS runner-image
+RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3-venv && \
+	apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN useradd --create-home myuser
+COPY --from=builder-image /home/myuser/venv /home/myuser/venv
+
+USER myuser
+RUN mkdir /home/myuser/socket_store
+WORKDIR /home/myuser/socket_store
+COPY . .

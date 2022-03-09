@@ -19,6 +19,9 @@ from .views import (
     CollectionOfferListView,
     CollectionOfferDetailView,
 
+    ProductOfferListView,
+    ProductOfferDetailView,
+
     SocketListView,
     SocketDetailView,
 
@@ -58,6 +61,8 @@ urlpatterns = [
     path('collection/<slug:slug>/', CollectionDetailView.as_view(), name='collection-detail'),
     path('collection-offer/', CollectionOfferListView.as_view(), name='collection-offer'),
     path('collection-offer/<slug:slug>/', CollectionOfferDetailView.as_view(), name='collection-offer-detail'),
+    path('product-offer/', ProductOfferListView.as_view(), name='product-offer'),
+    path('product-offer/<slug:slug>/', ProductOfferDetailView.as_view(), name='product-offer-detail'),
 ]
 
 urlpatterns_product = [
