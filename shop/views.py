@@ -1,11 +1,13 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import category_models
 from .models import brand_models
 from .models import collection_models
 from .models import product_models
+from .service import SocketFilter
 
 from .serializers import (
     FirstLevelCategorySerializer, 
@@ -143,6 +145,8 @@ class ProductOfferDetailView(generics.RetrieveAPIView):
 
 class SocketListView(generics.ListAPIView):
     queryset = product_models.Socket.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = SocketFilter
     serializer_class = SocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
