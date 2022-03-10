@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'shop',
     'mainpage',
+    'services',
 
     # 3d party applications #
     'drf_yasg',

@@ -11,6 +11,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('api/shop/', include('shop.urls')),
     path('api/mainpage/', include('mainpage.urls')),
+    path('api/services/', include('services.urls')),
 ]
 
 
