@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'sorl.thumbnail',
     'django_filters',
+    'crispy_forms',
     # 'whitenoise.runserver_nostatic',
 ]
 
