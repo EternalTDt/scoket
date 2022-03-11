@@ -42,12 +42,15 @@ INSTALLED_APPS = [
     'shop',
     'mainpage',
     'services',
+    'accounts',
 
     # 3d party applications #
     'drf_yasg',
     'ckeditor',
     'ckeditor_uploader',
     'sorl.thumbnail',
+    'djoser',
+    'rest_framework_simplejwt',
     'django_filters',
     'crispy_forms',
     # 'whitenoise.runserver_nostatic',
@@ -123,6 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
