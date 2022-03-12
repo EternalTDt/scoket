@@ -10,6 +10,7 @@ class UserProfile(models.Model):
         verbose_name='Профиль',
         related_name='profile',
     )
+    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True, default='')
     first_name = models.CharField("Имя", max_length=60)
     surname = models.CharField("Фамилия", max_length=60)
     patronymic = models.CharField("Отчество", max_length=60)
