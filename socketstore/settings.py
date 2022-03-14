@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mainpage',
     'services',
     'accounts',
+    'cart',
 
     # 3d party applications #
     'drf_yasg',

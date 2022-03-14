@@ -694,3 +694,15 @@ class NetworkFilterColor(models.Model):
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
         app_label="shop"
+
+
+class Products(models.Model):
+    socket = models.ForeignKey(Socket, on_delete=models.SET_NULL, blank=True, null=True)
+    switch = models.ForeignKey(Switch, on_delete=models.SET_NULL, blank=True, null=True)
+    frame = models.ForeignKey(Frame, on_delete=models.SET_NULL, blank=True, null=True)
+    plug = models.ForeignKey(Plug, on_delete=models.SET_NULL, blank=True, null=True)
+    computer_socket = models.ForeignKey(ComputerSocket, on_delete=models.SET_NULL, blank=True, null=True)
+    dimmer = models.ForeignKey(Dimmer, on_delete=models.SET_NULL, blank=True, null=True)
+    thermostat = models.ForeignKey(Thermostat, on_delete=models.SET_NULL, blank=True, null=True)
+    network_filter = models.ForeignKey(NetworkFilter, on_delete=models.SET_NULL, blank=True, null=True)
+
