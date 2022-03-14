@@ -67,6 +67,7 @@ class CollectionOfferSerializer(serializers.ModelSerializer):
 
 class CollectionSerializer(serializers.ModelSerializer):
     coolection_offer = CollectionOfferSerializer()
+    color = CollectionColorSerializer(many=True)
     sockets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
     switches = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
     plugs = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
