@@ -22,7 +22,7 @@ class Socket(abstract_models.AbstractProduct):
     socket_type = models.CharField("Тип", max_length=20)
     montage = models.CharField("Монтаж", max_length=20)
     terminal = models.CharField("Клемма", max_length=20)
-    rated_current = models.CharField("Номинальный ток", max_length=20)
+    rated_current = models.IntegerField("Номинальный ток, А", default=0)
     thumbnail = models.ImageField("Изображение", upload_to='socket_images', null=True, blank=True)
     product_offer = models.ForeignKey(
         ProductOffer, 
@@ -105,7 +105,7 @@ class Switch(abstract_models.AbstractProduct):
     switch_type = models.CharField("Тип", max_length=40)
     montage = models.CharField("Монтаж", max_length=20)
     terminal = models.CharField("Клемма", max_length=20)
-    rated_current = models.CharField("Номинальный ток", max_length=20)
+    rated_current = models.IntegerField("Номинальный ток, А", default=0)
     product_offer = models.ForeignKey(
         ProductOffer, 
         on_delete=models.CASCADE, 
@@ -369,7 +369,7 @@ class ComputerSocket(abstract_models.AbstractProduct):
         null=True,
     )
 
-    rated_current = models.CharField("Номинальный ток", max_length=20)
+    rated_current = models.IntegerField("Номинальный ток, А", default=0)
     socket = models.CharField("Розетка", max_length=20)
     grounding = models.BooleanField("Заземление", default=True)
     protection = models.CharField("Пылевлагозащищенность", max_length=20)
@@ -507,6 +507,8 @@ class DimmerColor(models.Model):
 # Thermostat
 
 class Thermostat(abstract_models.AbstractProduct):
+    from django.core.validators import MaxValueValidator, MinValueValidator
+    
     thermostat_type = models.CharField("Тип", max_length=30)
     is_smart_home_system_device = models.BooleanField("Устройство системы 'Умный дом'", default=False)
     appointment = models.CharField("Назначение", max_length=60)
@@ -543,20 +545,24 @@ class Thermostat(abstract_models.AbstractProduct):
         null=True,
     )
 
-    temperature_range = models.CharField("Диапазон температур", max_length=60)
-    remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика, м.", default=3)
-    temperature_hysteresis = models.FloatField("Температурный гистерезис, °C", default=0)
-    maximum_load_current = models.IntegerField("Максимальный ток нагрузки, А", default=16)
-    maximum_load_power = models.IntegerField("Максимальная мощность нагрузки, Вт", default=3000)
-    correction_of_sensor_readings = models.IntegerField("Коррекция показаний датчика, °C", default=10)
-    sensor_connection_diagnostics = models.BooleanField("Диагностика подключения датчика", default=True)
+    temperature_range = models.IntegerField(
+        "Диапазон температур, °C", 
+        default=1, 
+        validators = [MaxValueValidator(100), MinValueValidator(1)]
+    )
+    remote_sensor_wire_length = models.IntegerField("Длина провода выносного датчика, м.", default=3, blank=True)
+    temperature_hysteresis = models.FloatField("Температурный гистерезис, °C", default=0, blank=True)
+    maximum_load_current = models.IntegerField("Максимальный ток нагрузки, А", default=16, blank=True)
+    maximum_load_power = models.IntegerField("Максимальная мощность нагрузки, Вт", default=3000, blank=True)
+    correction_of_sensor_readings = models.IntegerField("Коррекция показаний датчика, °C", default=10, blank=True)
+    sensor_connection_diagnostics = models.BooleanField("Диагностика подключения датчика", default=True, blank=True)
     protection_class = models.CharField("Класс защиты корпуса", max_length=20, default="IP20")
     kids_protection = models.BooleanField("Защита от детей", default=False)
-    num_of_programs = models.IntegerField("Количество программ", default=0)
-    num_of_intervals_per_day = models.IntegerField("Количество интервалов в сутки", default=2)
-    adaptive_function = models.BooleanField("Адаптивная функция", default=True)
+    num_of_programs = models.IntegerField("Количество программ", default=0, blank=True)
+    num_of_intervals_per_day = models.IntegerField("Количество интервалов в сутки", default=2, blank=True)
+    adaptive_function = models.BooleanField("Адаптивная функция", default=True, blank=True)
     manual_mode = models.BooleanField("Ручной режим", default=True)
-    calculation_of_consumed_energy = models.BooleanField("Расчет потребленной энергии", default=True)
+    calculation_of_consumed_energy = models.BooleanField("Расчет потребленной энергии", default=True, blank=True)
 
 
     def __str__(self) -> str:
@@ -688,3 +694,15 @@ class NetworkFilterColor(models.Model):
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
         app_label="shop"
+
+
+class Products(models.Model):
+    socket = models.ForeignKey(Socket, on_delete=models.SET_NULL, blank=True, null=True)
+    switch = models.ForeignKey(Switch, on_delete=models.SET_NULL, blank=True, null=True)
+    frame = models.ForeignKey(Frame, on_delete=models.SET_NULL, blank=True, null=True)
+    plug = models.ForeignKey(Plug, on_delete=models.SET_NULL, blank=True, null=True)
+    computer_socket = models.ForeignKey(ComputerSocket, on_delete=models.SET_NULL, blank=True, null=True)
+    dimmer = models.ForeignKey(Dimmer, on_delete=models.SET_NULL, blank=True, null=True)
+    thermostat = models.ForeignKey(Thermostat, on_delete=models.SET_NULL, blank=True, null=True)
+    network_filter = models.ForeignKey(NetworkFilter, on_delete=models.SET_NULL, blank=True, null=True)
+

@@ -1,11 +1,22 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import category_models
 from .models import brand_models
 from .models import collection_models
 from .models import product_models
+from .service import (
+    SocketFilter,
+    SwitchFilter,
+    FrameFilter,
+    PlugFilter,
+    ComputerSocketFilter,
+    DimmerFilter,
+    ThermostatFilter,
+    NetworkFilterFilter,
+)
 
 from .serializers import (
     FirstLevelCategorySerializer, 
@@ -143,6 +154,8 @@ class ProductOfferDetailView(generics.RetrieveAPIView):
 
 class SocketListView(generics.ListAPIView):
     queryset = product_models.Socket.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = SocketFilter
     serializer_class = SocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -159,6 +172,8 @@ class SocketDetailView(generics.RetrieveAPIView):
 
 class SwitchListView(generics.ListAPIView):
     queryset = product_models.Switch.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = SwitchFilter
     serializer_class = SwitchSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -175,6 +190,8 @@ class SwitchDetailView(generics.RetrieveAPIView):
 
 class FrameListView(generics.ListAPIView):
     queryset = product_models.Frame.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = FrameFilter
     serializer_class = FrameSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -191,6 +208,8 @@ class FrameDetailView(generics.RetrieveAPIView):
 
 class PlugListView(generics.ListAPIView):
     queryset = product_models.Plug.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = PlugFilter
     serializer_class = PlugSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -207,6 +226,8 @@ class PlugDetailView(generics.RetrieveAPIView):
 
 class ComputerSocketListView(generics.ListAPIView):
     queryset = product_models.ComputerSocket.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ComputerSocketFilter
     serializer_class = ComputerSocketSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -223,6 +244,8 @@ class ComputerSocketDetailView(generics.RetrieveAPIView):
 
 class DimmerListView(generics.ListAPIView):
     queryset = product_models.Dimmer.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = DimmerFilter
     serializer_class = DimmerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -239,6 +262,8 @@ class DimmerDetailView(generics.RetrieveAPIView):
 
 class ThermostatListView(generics.ListAPIView):
     queryset = product_models.Thermostat.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ThermostatFilter
     serializer_class = ThermostatSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
@@ -255,6 +280,8 @@ class ThermostatDetailView(generics.RetrieveAPIView):
 
 class NetworkFilterListView(generics.ListAPIView):
     queryset = product_models.NetworkFilter.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = NetworkFilterFilter
     serializer_class = NetworkFilterSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination

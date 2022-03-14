@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'core',
     'shop',
     'mainpage',
+    'services',
+    'accounts',
+    'cart',
 
     # 3d party applications #
     'drf_yasg',
@@ -45,6 +48,11 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'whitenoise.runserver_nostatic',
+    'djoser',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'crispy_forms',
+    # 'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +120,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
 
