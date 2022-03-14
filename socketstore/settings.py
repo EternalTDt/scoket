@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_filters',
     'crispy_forms',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
