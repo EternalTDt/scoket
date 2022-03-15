@@ -33,12 +33,12 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # project apps #
-    'core',
-    'shop',
-    'mainpage',
-    'services',
-    'accounts',
-    'cart',
+    'core.apps.CoreConfig',
+    'shop.apps.ShopConfig',
+    'mainpage.apps.MainpageConfig',
+    'services.apps.ServicesConfig',
+    'accounts.apps.AccountsConfig',
+    'blog.apps.BlogConfig',
 
     # 3d party applications #
     'drf_yasg',

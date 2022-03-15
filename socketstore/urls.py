@@ -20,6 +20,8 @@ urlpatterns = [
     path('api/mainpage/', include('mainpage.urls')),
     # other info api
     path('api/services/', include('services.urls')),
+    # blog api
+    path('api/blog/', include('blog.urls')),
 ]
 
 
