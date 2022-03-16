@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_filters',
     'crispy_forms',
+    'colorfield',
     # 'whitenoise.runserver_nostatic',
 ]
 

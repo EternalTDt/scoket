@@ -4,6 +4,7 @@ from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 from .category_models import ThirdLevelCategory
 from .collection_models import Collection
+from colorfield.fields import ColorField
 
 class ProductOffer(models.Model):
     name = models.CharField('Название', max_length=60)
@@ -86,8 +87,7 @@ class SocketColor(models.Model):
         verbose_name="Розетка", 
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='socket_images')
 
     def __str__(self) -> str:
@@ -169,8 +169,7 @@ class SwitchColor(models.Model):
         verbose_name="Переключатель", 
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='switch_images')
 
     def __str__(self) -> str:
@@ -246,8 +245,7 @@ class FrameColor(models.Model):
         verbose_name="Рамка",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='frame_images')
 
     def __str__(self) -> str:
@@ -325,8 +323,7 @@ class PlugColor(models.Model):
         verbose_name="Заглушка",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='plug_images')
 
     def __str__(self) -> str:
@@ -406,8 +403,7 @@ class ComputerSocketColor(models.Model):
         verbose_name="Компьютерная розетка",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='computer_socket_images')
 
     def __str__(self) -> str:
@@ -491,8 +487,7 @@ class DimmerColor(models.Model):
         verbose_name="Диммер",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='dimmer_images')
 
     def __str__(self) -> str:
@@ -592,8 +587,7 @@ class ThermostatColor(models.Model):
         verbose_name="Терморегулятор",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='thermostat_images')
 
     def __str__(self) -> str:
@@ -683,8 +677,7 @@ class NetworkFilterColor(models.Model):
         verbose_name="Сетевой фильтр",
         related_name='color',
     )
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='networkfilter_images')
 
     def __str__(self) -> str:
