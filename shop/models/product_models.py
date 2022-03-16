@@ -698,4 +698,3 @@ class Products(models.Model):
     dimmer = models.ForeignKey(Dimmer, on_delete=models.SET_NULL, blank=True, null=True)
     thermostat = models.ForeignKey(Thermostat, on_delete=models.SET_NULL, blank=True, null=True)
     network_filter = models.ForeignKey(NetworkFilter, on_delete=models.SET_NULL, blank=True, null=True)
-
