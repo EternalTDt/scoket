@@ -106,11 +106,11 @@ class SocketColorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = product_models.SocketColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class SocketSerializer(serializers.ModelSerializer):
-    color = CollectionColorSerializer(many=True)
+    color = SocketColorSerializer(many=True)
     category = ThirdLevelCategorySerializer()
     collection = CollectionSerializer()
     product_offer = ProductOfferSerializer()
@@ -127,7 +127,7 @@ class SwitchColorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = product_models.SwitchColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class SwitchSerializer(serializers.ModelSerializer):
@@ -148,7 +148,7 @@ class FrameColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_models.FrameColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class FrameSerializer(serializers.ModelSerializer):
@@ -169,7 +169,7 @@ class PlugColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_models.PlugColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class PlugSerializer(serializers.ModelSerializer):
@@ -190,7 +190,7 @@ class ComputerSocketColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_models.ComputerSocketColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class ComputerSocketSerializer(serializers.ModelSerializer):
@@ -211,7 +211,7 @@ class DimmerColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_models.DimmerColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class DimmerSerializer(serializers.ModelSerializer):
@@ -232,7 +232,7 @@ class ThermostatColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_models.ThermostatColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class ThermostatSerializer(serializers.ModelSerializer):
@@ -253,7 +253,7 @@ class NetworkFilterColorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = product_models.NetworkFilterColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class NetworkFilterSerializer(serializers.ModelSerializer):
