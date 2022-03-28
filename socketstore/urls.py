@@ -7,10 +7,13 @@ from .yasg import urlpatterns as doc_urls
 
 
 urlpatterns = [
+    # admin
     path('admin/', admin.site.urls),
+    # ckeditor
     path('ckeditor/', include('ckeditor_uploader.urls')),
 	# djoser
     path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
     # accounts
     path("api/accounts/",include("accounts.urls")),
