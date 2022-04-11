@@ -16,15 +16,17 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
     # accounts
-    path("api/accounts/",include("accounts.urls")),
+    path('accounts/api/',include("accounts.urls")),
     # shop api
     path('api/shop/', include('shop.urls')),
     # mainpage api
-    path('api/mainpage/', include('mainpage.urls')),
+    path('mainpage/api/', include('mainpage.urls')),
     # other info api
-    path('api/services/', include('services.urls')),
+    path('services/api/', include('services.urls')),
     # blog api
-    path('api/blog/', include('blog.urls')),
+    path('blog/api/', include('blog.urls')),
+    # orders
+    path('orders/api/', include('orders.urls')),
 ]
 
 
