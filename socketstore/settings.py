@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'potapovvstore.herokuapp.c
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,9 +57,11 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'crispy_forms',
-    'colorfield',
     # 'whitenoise.runserver_nostatic',
 ]
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     'socketstore.middleware.time_stamp.RequestTimeMiddleware',

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from shop.models import product_models
 from django.utils.crypto import get_random_string
 from django.template.defaultfilters import slugify
 
@@ -38,7 +37,7 @@ class Order(models.Model):
     commentary = models.TextField('Комментарий к заказу', max_length=500, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.order_identificator} | {self.created_at}'
+        return f'{self.order_identificator} | {self.created_at.strftime("%Y.%m.%d %H:%M")}'
 
     def save(self, *args, **kwargs):
         value = self.order_identificator

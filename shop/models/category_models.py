@@ -10,7 +10,7 @@ class ThirdLevelCategory(abstract_models.AbstractCategory):
 
     class Meta:
         verbose_name = "Категория 3 уровня"
-        verbose_name_plural = "9.3 Категории 3 уровня"
+        verbose_name_plural = "Категории 3 уровня"
 
     objects = models.Manager()
 
@@ -29,7 +29,7 @@ class SecondLevelCategory(abstract_models.AbstractCategory):
 
     class Meta:
         verbose_name = "Категория 2 уровня"
-        verbose_name_plural = "9.2 Категории 2 уровня"
+        verbose_name_plural = "Категории 2 уровня"
 
     objects = models.Manager()
 
@@ -49,6 +49,6 @@ class FirstLevelCategory(abstract_models.AbstractCategory):
 
     class Meta:
         verbose_name = "Категория 1 уровня"
-        verbose_name_plural = "9.1 Категории 1 уровня"
+        verbose_name_plural = "Категории 1 уровня"
 
     objects = models.Manager()

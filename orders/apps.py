@@ -7,4 +7,4 @@ class OrdersConfig(AppConfig):
     verbose_name = "Заказы"
 
     def ready(self):
-        import orders.signals
+        import orders.tasks
