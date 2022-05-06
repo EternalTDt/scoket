@@ -6,6 +6,7 @@ from .models import category_models
 from .models import brand_models
 from .models import collection_models
 from .models import product_models
+from .models import promotions_models
 
 
 class BrandAdminForm(forms.ModelForm):
@@ -565,3 +566,12 @@ class NetworkFilterAdmin(admin.ModelAdmin):
 
     thumbnail_preview.short_description = 'Изображение'
     thumbnail_preview.allow_tags = True
+
+
+@admin.register(promotions_models.Promotion)
+class PromtionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'promotion_type',)
+    list_filter = ('promotion_type',)
+    list_display_links = ('name',)
+    search_fields = ('name', 'promotion_type')
+    save_as = True

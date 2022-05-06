@@ -19,8 +19,6 @@ urlpatterns = [
     path('accounts/api/',include("accounts.urls")),
     # shop api
     path('api/shop/', include('shop.urls')),
-    # mainpage api
-    path('mainpage/api/', include('mainpage.urls')),
     # other info api
     path('services/api/', include('services.urls')),
     # blog api
