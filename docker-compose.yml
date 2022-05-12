@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - ./store:/socketstore
+    ports:
+      - "3003:3003"
+    command: >
+      sh -c "python manage.py migrate && python3 manage.py wait_for_db && python manage.py runserver 0.0.0.0:3003"
+    env_file:
+      - ./socketstore/.env
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=socket
+      - DATABASE_USER=proton
+      - DATABASE_PASSWORD=2554963demidovT!
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_DB=socket
+      - POSTGRES_USER=proton
+      - POSTGRES_PASSWORD=2554963demidovT!
+    ports:
+      - "5432:5432"
+    volumes:
+      - tutorial-volume:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+  celery:
+    restart: always
+    build:
+      context: .
+    command: celery -A socketstore worker -l info
+    volumes:
+      - ./store:/socketstore
+    env_file:
+      - ./socketstore/.env
+    depends_on:
+      - db
+      - redis
+      - app
+
+volumes:
+  tutorial-volume:

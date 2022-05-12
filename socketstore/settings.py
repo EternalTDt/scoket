@@ -23,7 +23,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'potapovvstore.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -107,6 +107,7 @@ DATABASES = {
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
+        'PORT': '',
     }
 }
 
@@ -154,7 +155,8 @@ EMAIL_PORT = 587
 
 
 # redis-celery
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -333,15 +335,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # WHITENOISE_AUTOREFRESH = True
 
-
-CORS_ALLOWED_ORIGINS = [
-    "https://www.test-cors.org",
-]
-
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://www.test-cors.org/',
-]
-
-
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS: True
