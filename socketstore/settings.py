@@ -107,7 +107,6 @@ DATABASES = {
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
-        'PORT': '',
     }
 }
 
@@ -335,4 +334,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # WHITENOISE_AUTOREFRESH = True
 
-CORS_ALLOW_ALL_ORIGINS: True
+CORS_ALLOW_ALL_ORIGINS = True
