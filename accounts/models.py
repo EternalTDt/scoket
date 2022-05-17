@@ -24,10 +24,10 @@ class UserProfile(models.Model):
         related_name='profile',
     )
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True, null=True, blank=True)
-    first_name = models.CharField("Имя", max_length=60)
-    surname = models.CharField("Фамилия", max_length=60)
-    patronymic = models.CharField("Отчество", max_length=60)
-    phone_number = models.CharField("Телефон", max_length=17)
+    first_name = models.CharField("Имя", max_length=60, blank=True)
+    surname = models.CharField("Фамилия", max_length=60, blank=True)
+    patronymic = models.CharField("Отчество", max_length=60, blank=True)
+    phone_number = models.CharField("Телефон", max_length=17, blank=True)
     is_mailing = models.BooleanField("Подписан на рассылку", default=False)
     shipping_addresses = models.ForeignKey(
         ShippingAddress, 

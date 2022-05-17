@@ -139,8 +139,9 @@ EMAIL_PORT = 587
 
 
 # redis-celery
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_BROKER_URL = "127.0.0.1://redis:6379"
+CELERY_RESULT_BACKEND = "127.0.0.1://redis:6379"
+
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
