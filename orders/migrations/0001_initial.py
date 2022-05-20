@@ -21,8 +21,13 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order_identificator', models.CharField(default=orders.models.generate_order_identificator, max_length=6, verbose_name='Номер заказа')),
                 ('slug', models.SlugField(max_length=60, unique=True, verbose_name='Ссылка')),
+<<<<<<< HEAD
                 ('payment_method', models.CharField(choices=[('Наличными', 'Наличными'), ('Картой', 'Картой')], default='Картой', max_length=200, verbose_name='Способ оплаты')),
                 ('status', models.CharField(choices=[('Отменен', 'Отменен'), ('Доставлен', 'Доставлен'), ('Принят в обработку', 'Принят в обработку'), ('Оплачен', 'Оплачен'), ('Создан', 'Создан'), ('Передан в доставку', 'Передан в доставку'), ('Подтвержден', 'Подтвержден')], default='Создан', max_length=200, verbose_name='Статус заказа')),
+=======
+                ('payment_method', models.CharField(choices=[('Картой', 'Картой'), ('Наличными', 'Наличными')], default='Картой', max_length=200, verbose_name='Способ оплаты')),
+                ('status', models.CharField(choices=[('Передан в доставку', 'Передан в доставку'), ('Принят в обработку', 'Принят в обработку'), ('Отменен', 'Отменен'), ('Оплачен', 'Оплачен'), ('Доставлен', 'Доставлен'), ('Создан', 'Создан'), ('Подтвержден', 'Подтвержден')], default='Создан', max_length=200, verbose_name='Статус заказа')),
+>>>>>>> a4b2d307b170c9d374e424d842c5ce02827c7ed7
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Создано')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Обновлено')),
                 ('commentary', models.TextField(blank=True, max_length=500, verbose_name='Комментарий к заказу')),
