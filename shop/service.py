@@ -11,7 +11,7 @@ class SocketFilter(filters.FilterSet):
     rated_current = filters.RangeFilter()
     width = filters.RangeFilter()
     height = filters.RangeFilter()
-    depth = filters.RangeFilter() 
+    depth = filters.RangeFilter()
 
     class Meta:
         model = product_models.Socket
@@ -30,6 +30,7 @@ class SocketFilter(filters.FilterSet):
             'width',
             'height',
             'depth',
+            'product_offer',
         ]
 
 
@@ -58,6 +59,7 @@ class SwitchFilter(filters.FilterSet):
             'width',
             'height',
             'depth',
+            'product_offer',
         ]
 
 
@@ -77,6 +79,7 @@ class FrameFilter(filters.FilterSet):
             'height',
             'depth',
             'frame_type',
+            'product_offer',
         ]
 
 
@@ -96,6 +99,7 @@ class PlugFilter(filters.FilterSet):
             'plug_type',
             'montage',
             'backlight',
+            'product_offer',
         ]
 
 
@@ -118,6 +122,7 @@ class ComputerSocketFilter(filters.FilterSet):
             'rated_current',
             'grounding',
             'kids_protection',
+            'product_offer',
         ]
 
 
@@ -142,6 +147,7 @@ class DimmerFilter(filters.FilterSet):
             'kids_protection',
             'backlight',
             'control',
+            'product_offer',
         ]
 
 
@@ -179,6 +185,7 @@ class ThermostatFilter(filters.FilterSet):
             'adaptive_function',
             'manual_mode',
             'calculation_of_consumed_energy',
+            'product_offer',
         ]
 
 
@@ -213,4 +220,5 @@ class NetworkFilterFilter(filters.FilterSet):
             'load_short_circuit_protection',
             'over_voltage_protection',
             'remote_control',
+            'product_offer',
         ]
