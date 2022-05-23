@@ -60,7 +60,6 @@ class Socket(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='socket')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -142,7 +141,6 @@ class Switch(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='switch')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -219,7 +217,6 @@ class Frame(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='frame')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -298,7 +295,6 @@ class Plug(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='plug')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -379,7 +375,6 @@ class ComputerSocket(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='computer_socket')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -464,7 +459,6 @@ class Dimmer(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='dimmer')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -564,7 +558,6 @@ class Thermostat(abstract_models.AbstractProduct):
     adaptive_function = models.BooleanField("Адаптивная функция", default=True, blank=True)
     manual_mode = models.BooleanField("Ручной режим", default=True)
     calculation_of_consumed_energy = models.BooleanField("Расчет потребленной энергии", default=True, blank=True)
-    type_of = models.CharField(max_length=60, default='thermostat')
 
 
     def __str__(self) -> str:
@@ -656,7 +649,6 @@ class NetworkFilter(abstract_models.AbstractProduct):
     over_voltage_protection = models.BooleanField("Защита от повышения напряжения", default=False)
     remote_control = models.BooleanField("Пульт ДУ", blank=True)
     thumbnail = models.ImageField("Изображение", upload_to='networkfilter_images', null=True, blank=True)
-    type_of = models.CharField(max_length=60, default='network_filter')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -695,14 +687,3 @@ class NetworkFilterColor(models.Model):
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
         app_label="shop"
-
-
-class Products(models.Model):
-    socket = models.ForeignKey(Socket, on_delete=models.SET_NULL, blank=True, null=True)
-    switch = models.ForeignKey(Switch, on_delete=models.SET_NULL, blank=True, null=True)
-    frame = models.ForeignKey(Frame, on_delete=models.SET_NULL, blank=True, null=True)
-    plug = models.ForeignKey(Plug, on_delete=models.SET_NULL, blank=True, null=True)
-    computer_socket = models.ForeignKey(ComputerSocket, on_delete=models.SET_NULL, blank=True, null=True)
-    dimmer = models.ForeignKey(Dimmer, on_delete=models.SET_NULL, blank=True, null=True)
-    thermostat = models.ForeignKey(Thermostat, on_delete=models.SET_NULL, blank=True, null=True)
-    network_filter = models.ForeignKey(NetworkFilter, on_delete=models.SET_NULL, blank=True, null=True)

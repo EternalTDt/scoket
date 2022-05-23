@@ -22,6 +22,8 @@ from .views import (
     ProductOfferListView,
     ProductOfferDetailView,
 
+    ProductsAPIView,
+
     SocketListView,
     SocketDetailView,
 
@@ -66,6 +68,7 @@ urlpatterns = [
 ]
 
 urlpatterns_product = [
+    path('products/', ProductsAPIView.as_view(), name="products"),
     path('socket/', SocketListView.as_view(), name="socket"),
     path('socket/<slug:slug>/', SocketDetailView.as_view(), name="socket-detail"),
     path('switch/', SwitchListView.as_view(), name="switch"),

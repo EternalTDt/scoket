@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'crispy_forms',
+    'drf_multiple_model',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
