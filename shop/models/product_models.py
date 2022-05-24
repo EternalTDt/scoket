@@ -379,7 +379,7 @@ class ComputerSocket(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
-    type_of = models.CharField(max_length=60, default='computer_socket')
+    type_of = models.CharField(max_length=60, default='computer-socket')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -656,7 +656,7 @@ class NetworkFilter(abstract_models.AbstractProduct):
     over_voltage_protection = models.BooleanField("Защита от повышения напряжения", default=False)
     remote_control = models.BooleanField("Пульт ДУ", blank=True)
     thumbnail = models.ImageField("Изображение", upload_to='networkfilter_images', null=True, blank=True)
-    type_of = models.CharField(max_length=60, default='network_filter')
+    type_of = models.CharField(max_length=60, default='network-filter')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
