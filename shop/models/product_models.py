@@ -6,6 +6,7 @@ from .category_models import ThirdLevelCategory
 from .collection_models import Collection
 from colorfield.fields import ColorField
 
+
 class ProductOffer(models.Model):
     name = models.CharField('Название', max_length=60)
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)

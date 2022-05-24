@@ -1,5 +1,6 @@
 from django.db import models
 from . import abstract_models
+from colorfield.fields import ColorField
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 
@@ -42,9 +43,13 @@ class Collection(abstract_models.AbstractCollection):
 
 
 class CollectionColor(models.Model):
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, verbose_name="Коллекция", related_name='color')
-    color = models.CharField('Цвет', max_length=60)
-    color_code = models.CharField('Код цвета', max_length=60, default='#fff')
+    Collection = models.ForeignKey(
+        Collection, 
+        on_delete=models.CASCADE, 
+        verbose_name="Коллекция",
+        related_name='color',
+    )
+    color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='collection_images')
 
     def __str__(self) -> str:
