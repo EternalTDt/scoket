@@ -7,7 +7,8 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class PostCommentInline(admin.StackedInline):
     model = Comment
-    extra = 1
+    readonly_fields = ('body', 'owner',)
+    extra = 0
 
 
 class PostAdminForm(forms.ModelForm):
@@ -33,7 +34,6 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('owner', 'post')
     list_display_links = ('owner',)
     search_fields = ('owner__username', 'post__title')
-    prepopulated_fields = {'slug': ('owner', 'post')}
 
 
 @admin.register(Tag)

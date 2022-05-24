@@ -39,9 +39,11 @@ class Post(models.Model):
 class Comment(models.Model):
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
     body = models.TextField("Содержание", blank=False)
-    slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
     owner = models.ForeignKey('auth.User', verbose_name="Пользователь", related_name='comments', on_delete=models.CASCADE)
     post = models.ForeignKey('Post', verbose_name="Пост", related_name='comments', on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f'{self.owner.username}: {self.post.title}'
 
     class Meta:
         verbose_name = "Комментарий"
