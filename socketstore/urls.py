@@ -14,7 +14,6 @@ urlpatterns = [
 	# djoser
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path('auth/', include('djoser.urls.jwt')),
     # accounts
     path('accounts/api/',include("accounts.urls")),
     # shop api
