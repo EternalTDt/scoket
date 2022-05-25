@@ -84,15 +84,7 @@ class CollectionSerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
-class ProductOfferSerializer(serializers.ModelSerializer):
-    sockets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    switches = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    plugs = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    frames = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    computer_sockets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    dimmers = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    thermostats = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
-    network_filters = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+class ProductOfferSerializer(serializers.ModelSerializer):                                                            
 
     class Meta:
         model = product_models.ProductOffer
@@ -111,9 +103,9 @@ class SocketColorSerializer(serializers.ModelSerializer):
 
 class SocketSerializer(serializers.ModelSerializer):
     color = SocketColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Socket
@@ -132,9 +124,9 @@ class SwitchColorSerializer(serializers.ModelSerializer):
 
 class SwitchSerializer(serializers.ModelSerializer):
     color = SwitchColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Switch
@@ -153,9 +145,9 @@ class FrameColorSerializer(serializers.ModelSerializer):
 
 class FrameSerializer(serializers.ModelSerializer):
     color = FrameColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Frame
@@ -174,9 +166,9 @@ class PlugColorSerializer(serializers.ModelSerializer):
 
 class PlugSerializer(serializers.ModelSerializer):
     color = PlugColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Plug
@@ -195,9 +187,9 @@ class ComputerSocketColorSerializer(serializers.ModelSerializer):
 
 class ComputerSocketSerializer(serializers.ModelSerializer):
     color = ComputerSocketColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.ComputerSocket()
@@ -216,9 +208,9 @@ class DimmerColorSerializer(serializers.ModelSerializer):
 
 class DimmerSerializer(serializers.ModelSerializer):
     color = DimmerColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Dimmer()
@@ -237,9 +229,9 @@ class ThermostatColorSerializer(serializers.ModelSerializer):
 
 class ThermostatSerializer(serializers.ModelSerializer):
     color = ThermostatColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.Thermostat()
@@ -258,9 +250,9 @@ class NetworkFilterColorSerializer(serializers.ModelSerializer):
 
 class NetworkFilterSerializer(serializers.ModelSerializer):
     color = NetworkFilterColorSerializer(many=True)
-    category = ThirdLevelCategorySerializer()
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     collection = CollectionSerializer()
-    product_offer = ProductOfferSerializer()
+    product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
         model = product_models.NetworkFilter()

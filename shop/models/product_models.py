@@ -6,6 +6,7 @@ from .category_models import ThirdLevelCategory
 from .collection_models import Collection
 from colorfield.fields import ColorField
 
+
 class ProductOffer(models.Model):
     name = models.CharField('Название', max_length=60)
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
@@ -60,6 +61,7 @@ class Socket(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='socket')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -141,6 +143,7 @@ class Switch(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='switch')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -217,6 +220,7 @@ class Frame(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='frame')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -295,6 +299,7 @@ class Plug(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='plug')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -375,6 +380,7 @@ class ComputerSocket(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='computer-socket')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -459,6 +465,7 @@ class Dimmer(abstract_models.AbstractProduct):
     width = models.IntegerField("Ширина", default=0)
     height = models.IntegerField("Высота", default=0)
     depth = models.IntegerField("Глубина", default=0)
+    type_of = models.CharField(max_length=60, default='dimmer')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -558,7 +565,7 @@ class Thermostat(abstract_models.AbstractProduct):
     adaptive_function = models.BooleanField("Адаптивная функция", default=True, blank=True)
     manual_mode = models.BooleanField("Ручной режим", default=True)
     calculation_of_consumed_energy = models.BooleanField("Расчет потребленной энергии", default=True, blank=True)
-
+    type_of = models.CharField(max_length=60, default='thermostat')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
@@ -649,6 +656,7 @@ class NetworkFilter(abstract_models.AbstractProduct):
     over_voltage_protection = models.BooleanField("Защита от повышения напряжения", default=False)
     remote_control = models.BooleanField("Пульт ДУ", blank=True)
     thumbnail = models.ImageField("Изображение", upload_to='networkfilter_images', null=True, blank=True)
+    type_of = models.CharField(max_length=60, default='network-filter')
 
     def __str__(self) -> str:
         return f'{self.code}: {self.name}'
