@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_multiple_model.views import FlatMultipleModelAPIView, ObjectMultipleModelAPIView
 
 from .models import category_models
 from .models import brand_models
@@ -149,6 +150,52 @@ class ProductOfferDetailView(generics.RetrieveAPIView):
     serializer_class = ProductOfferSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class ProductsAPIView(FlatMultipleModelAPIView):
+    querylist = [
+        {
+            'queryset': product_models.Socket.objects.all(), 
+            'serializer_class': SocketSerializer, 
+            'label': 'socket',
+        },
+        {
+            'queryset': product_models.Switch.objects.all(), 
+            'serializer_class': SwitchSerializer,
+            'label': 'switch',
+        },
+        {
+            'queryset': product_models.Frame.objects.all(), 
+            'serializer_class': FrameSerializer,
+            'label': 'frame',
+        },
+        {
+            'queryset': product_models.Plug.objects.all(), 
+            'serializer_class': PlugSerializer,
+            'label': 'plug',
+        },
+        {
+            'queryset': product_models.ComputerSocket.objects.all(), 
+            'serializer_class': ComputerSocketSerializer,
+            'label': 'computer-socket',
+        },
+        {
+            'queryset': product_models.Dimmer.objects.all(), 
+            'serializer_class': DimmerSerializer,
+            'label': 'dimmer',
+        },
+        {
+            'queryset': product_models.Thermostat.objects.all(), 
+            'serializer_class': ThermostatSerializer,
+            'label': 'thermostat',
+        },
+        {
+            'queryset': product_models.NetworkFilter.objects.all(), 
+            'serializer_class': NetworkFilterSerializer,
+            'label': 'network-filter',
+        },
+    ]
+
 
 # Socket
 

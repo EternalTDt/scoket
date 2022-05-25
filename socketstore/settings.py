@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'crispy_forms',
+    'drf_multiple_model',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -121,7 +122,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -167,6 +168,7 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'REQUIRED_FIELDS': ['username'],
     'SERIALIZERS': {},
 }
 

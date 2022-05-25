@@ -215,7 +215,7 @@ class ProductOfferAdmin(admin.ModelAdmin):
 class SocketAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability', 'grounding', 'kids_protection', 'backlight',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -256,7 +256,7 @@ class SocketAdmin(admin.ModelAdmin):
 class SwitchAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability', 'backlight',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -295,7 +295,7 @@ class SwitchAdmin(admin.ModelAdmin):
 class FrameAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -334,7 +334,7 @@ class FrameAdmin(admin.ModelAdmin):
 class PlugAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability', 'backlight',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -373,7 +373,7 @@ class PlugAdmin(admin.ModelAdmin):
 class ComputerSocketAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability', 'grounding', 'kids_protection',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -412,7 +412,7 @@ class ComputerSocketAdmin(admin.ModelAdmin):
 class DimmerAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
     list_filter = ('availability', 'grounding', 'kids_protection', 'backlight',)
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -463,7 +463,7 @@ class ThermostatAdmin(admin.ModelAdmin):
         'manual_mode',
         'calculation_of_consumed_energy',
     )
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
@@ -529,7 +529,7 @@ class NetworkFilterAdmin(admin.ModelAdmin):
         'over_voltage_protection',
         'remote_control_wi_fi',
     )
-    readonly_fields = ('thumbnail_preview', 'type_of',)
+    readonly_fields = ('thumbnail_preview',)
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
