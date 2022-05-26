@@ -1,5 +1,6 @@
 from django.db import models
 from .brand_models import Brand
+from django.contrib.auth.models import User
 
 
 class AbstractCategory(models.Model):
@@ -36,6 +37,7 @@ class AbstractProduct(models.Model):
     price = models.DecimalField('Стоимость', decimal_places=2, max_digits=10)
     stock = models.IntegerField('Количество', default=0)
     availability = models.BooleanField('Наличие', default=True)
+    favourite = models.ManyToManyField(User, blank=True)
 
 
     class Meta:

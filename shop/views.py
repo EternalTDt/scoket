@@ -195,7 +195,8 @@ class ProductsAPIView(FlatMultipleModelAPIView):
             'label': 'network-filter',
         },
     ]
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['type_of', 'product_offer__slug']
 
 # Socket
 
