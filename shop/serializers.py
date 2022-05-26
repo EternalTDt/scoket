@@ -53,7 +53,7 @@ class CollectionColorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = collection_models.CollectionColor
-        fields = ('color', 'color_code', 'image')
+        fields = ('color', 'image')
 
 
 class CollectionOfferSerializer(serializers.ModelSerializer):
