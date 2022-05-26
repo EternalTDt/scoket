@@ -84,7 +84,15 @@ class CollectionSerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
-class ProductOfferSerializer(serializers.ModelSerializer):                                                            
+class ProductOfferSerializer(serializers.ModelSerializer):
+    sockets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    switches = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    plugs = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    frames = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    computer_sockets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    dimmers = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    thermostats = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+    network_filters = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')                                                         
 
     class Meta:
         model = product_models.ProductOffer
