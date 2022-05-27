@@ -479,7 +479,7 @@ class ThermostatAdmin(admin.ModelAdmin):
         }),
         ('Основные', {
             'fields': (
-                'thermostat_type', 'appointment', 'control', 'display', 'wi_fi_control',
+                'thermostat_type', 'appointment', 'control', 'display', 'is_smart_home_system_device', 'wi_fi_control',
                 'air_temperature_sensor','floor_temperature_sensor', 'remote_control', 'montage',
             )
         }),
