@@ -32,6 +32,8 @@ class Order(models.Model):
     slug = models.SlugField("Ссылка", max_length=60, db_index=True, unique=True)
     payment_method = models.CharField("Способ оплаты", max_length=200, choices=PAYMENT_CHOICES, default='Картой')
     status = models.CharField("Статус заказа", max_length=200, choices=ORDER_STATUS, default='Создан')
+    phone_number = models.CharField("Телефон", max_length=17, default='')
+    address = models.CharField("Адрес", max_length=100, default='')
     created_at = models.DateTimeField('Создано', auto_now_add=True)
     updated_at = models.DateTimeField('Обновлено', auto_now=True)
     commentary = models.TextField('Комментарий к заказу', max_length=500, blank=True)

@@ -25,10 +25,8 @@ class OrderListView(generics.ListCreateAPIView):
         email = user.email
         first_name = user.profile.first_name
         patronymic = user.profile.patronymic
-        phone = user.profile.phone_number
-        city = user.profile.shipping_addresses.city
-        address = user.profile.shipping_addresses.address
-        postal_code = user.profile.shipping_addresses.postal_code
+        phone = order.phone_number
+        address = order.address
         order_identificator = order.order_identificator
         payment_method = order.payment_method
         commentary = order.commentary
@@ -40,7 +38,7 @@ class OrderListView(generics.ListCreateAPIView):
             'Более подробную информацию о заказе вы можете найти в своем пофиле в разделе "История заказов" \n\n' \
             'С уважением, команда protonelectrics.by'
 
-        send_tg_message.delay(order_identificator, first_name, patronymic, payment_method, commentary, phone, city, address, postal_code)
+        send_tg_message.delay(order_identificator, first_name, patronymic, payment_method, commentary, phone, address)
         send_email.delay(subject, message, host_email, email)
 
 

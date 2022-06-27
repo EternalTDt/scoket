@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_multiple_model.views import FlatMultipleModelAPIView, ObjectMultipleModelAPIView
+from rest_framework import filters
 
 from .models import category_models
 from .models import brand_models
@@ -195,8 +196,9 @@ class ProductsAPIView(FlatMultipleModelAPIView):
             'label': 'network-filter',
         },
     ]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['type_of', 'product_offer__slug', 'collection__slug',]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['type_of', 'product_offer__slug', 'collection__slug', 'manufacturer__slug']
+    search_fields = ('name', 'code', 'manufacturer__name',)
 
 # Socket
 

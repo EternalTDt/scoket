@@ -17,10 +17,10 @@ def sleepy(duration):
 
 
 @shared_task()
-def send_tg_message(order_identificator, first_name, patronymic, payment_method, commentary, phone, city, address, postal_code):
+def send_tg_message(order_identificator, first_name, patronymic, payment_method, commentary, phone, address):
     telegram_send.send(
         messages =
-        [f"💸 Заказ #{order_identificator} \n👤 {first_name} {patronymic} \n💳 {payment_method} \n🗣 «{commentary}» \n📞 {phone} \n🏠 {city}, {address}, {postal_code}"]
+        [f"💸 Заказ #{order_identificator} \n👤 {first_name} {patronymic} \n💳 {payment_method} \n🗣 «{commentary}» \n📞 {phone} \n🏠 {address}"]
     )
 
 
