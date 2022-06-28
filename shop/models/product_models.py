@@ -79,7 +79,7 @@ class Socket(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Розетка"
-        verbose_name_plural = "1. Розетки"
+        verbose_name_plural = "Розетки"
 
 
 class SocketColor(models.Model):
@@ -161,7 +161,7 @@ class Switch(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Переключатель"
-        verbose_name_plural = "2. Переключатели"
+        verbose_name_plural = "Переключатели"
         app_label="shop"
 
 
@@ -238,7 +238,7 @@ class Frame(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Рамка"
-        verbose_name_plural = "3. Рамки"
+        verbose_name_plural = "Рамки"
         app_label="shop"
 
 
@@ -317,7 +317,7 @@ class Plug(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Заглушка"
-        verbose_name_plural = "4. Заглушки"
+        verbose_name_plural = "Заглушки"
         app_label="shop"
 
 
@@ -398,7 +398,7 @@ class ComputerSocket(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Компьютерная розетка"
-        verbose_name_plural = "5. Компьютерные розетки"
+        verbose_name_plural = "Компьютерные розетки"
         app_label="shop"
 
 
@@ -483,7 +483,7 @@ class Dimmer(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Диммер"
-        verbose_name_plural = "6. Диммеры"
+        verbose_name_plural = "Диммеры"
         app_label="shop"
 
 
@@ -583,7 +583,7 @@ class Thermostat(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Терморегулятор"
-        verbose_name_plural = "7. Терморегуляторы"
+        verbose_name_plural = "Терморегуляторы"
         app_label="shop"
 
 
@@ -674,7 +674,7 @@ class NetworkFilter(abstract_models.AbstractProduct):
 
     class Meta:
         verbose_name = "Сетевой фильтр"
-        verbose_name_plural = "8. Сетевые фильтры"
+        verbose_name_plural = "Сетевые фильтры"
         app_label="shop"
 
 
