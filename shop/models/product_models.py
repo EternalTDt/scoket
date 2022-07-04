@@ -95,6 +95,18 @@ class SocketColor(models.Model):
     def __str__(self) -> str:
         return self.color
 
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
+
+
     class Meta:
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
@@ -178,6 +190,17 @@ class SwitchColor(models.Model):
     def __str__(self) -> str:
         return self.color
 
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
+
     class Meta:
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
@@ -255,6 +278,17 @@ class FrameColor(models.Model):
     def __str__(self) -> str:
         return self.color
 
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
+
     class Meta:
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
@@ -330,6 +364,17 @@ class PlugColor(models.Model):
     )
     color = ColorField('Цвет', image_field='image')
     image = models.ImageField('Изображение', upload_to='plug_images')
+
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
 
     def __str__(self) -> str:
         return self.color
@@ -415,6 +460,17 @@ class ComputerSocketColor(models.Model):
     def __str__(self) -> str:
         return self.color
 
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
+
     class Meta:
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
@@ -499,6 +555,17 @@ class DimmerColor(models.Model):
 
     def __str__(self) -> str:
         return self.color
+
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
 
     class Meta:
         verbose_name = "Цвет"
@@ -600,6 +667,17 @@ class ThermostatColor(models.Model):
     def __str__(self) -> str:
         return self.color
 
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
+
     class Meta:
         verbose_name = "Цвет"
         verbose_name_plural = "Цвета"
@@ -690,6 +768,17 @@ class NetworkFilterColor(models.Model):
 
     def __str__(self) -> str:
         return self.color
+
+    @property
+    def image_preview(self):
+        if self.image:
+            _image = get_thumbnail(self.image,
+                                      '250x120',
+                                      upscale=False,
+                                      crop=False,
+                                      quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_image.url, _image.width, _image.height))
+        return ""
 
     class Meta:
         verbose_name = "Цвет"

@@ -3,6 +3,7 @@ from .models import category_models
 from .models import brand_models
 from .models import collection_models
 from .models import product_models
+from .models import reviews_models
 
 
 # Third Level Category
@@ -102,6 +103,15 @@ class ProductOfferSerializer(serializers.ModelSerializer):
 
 # Socket
 
+class SocketReviewSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    avg_rating = serializers.DecimalField(source='get_average_rating', max_digits=3, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = reviews_models.SocketReview
+        fields = ('created_at', 'body', 'owner', 'rating', 'avg_rating', 'sockets',)
+
+
 class SocketColorSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -115,12 +125,14 @@ class SocketSerializer(serializers.ModelSerializer):
     collection = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     product_offer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     manufacturer = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    reviews = SocketReviewSerializer(many=True)
 
     general = serializers.SerializerMethodField('get_general')
     basic = serializers.SerializerMethodField('get_basic')
     informational = serializers.SerializerMethodField('get_informational')
     technical = serializers.SerializerMethodField('get_technical')
     proportions = serializers.SerializerMethodField('get_proportions')
+
 
     def get_general(self, obj):
         return {
@@ -171,7 +183,8 @@ class SocketSerializer(serializers.ModelSerializer):
             'thumbnail', 
             'color', 
             'manufacturer', 
-            'product_offer', 
+            'product_offer',
+            'reviews', 
             'category', 
             'collection', 
             'general', 

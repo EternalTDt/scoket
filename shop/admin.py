@@ -7,6 +7,7 @@ from .models import brand_models
 from .models import collection_models
 from .models import product_models
 from .models import promotions_models
+from .models import reviews_models
 
 
 class BrandAdminForm(forms.ModelForm):
@@ -138,45 +139,103 @@ class CollectionInline(admin.StackedInline):
     extra = 0
 
 
-class SocketColorInline(admin.StackedInline):
+class SocketColorInline(admin.TabularInline):
     model = product_models.SocketColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class SwitchColorInline(admin.StackedInline):
+class SwitchColorInline(admin.TabularInline):
     model = product_models.SwitchColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class FrameColorInline(admin.StackedInline):
+class FrameColorInline(admin.TabularInline):
     model = product_models.FrameColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class PlugColorInline(admin.StackedInline):
+class PlugColorInline(admin.TabularInline):
     model = product_models.PlugColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class ComputerSocketColorInline(admin.StackedInline):
+class ComputerSocketColorInline(admin.TabularInline):
     model = product_models.ComputerSocketColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class DimmerColorInline(admin.StackedInline):
+class DimmerColorInline(admin.TabularInline):
     model = product_models.DimmerColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class ThermostatColorInline(admin.StackedInline):
+class ThermostatColorInline(admin.TabularInline):
     model = product_models.ThermostatColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
+
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
 
 
-class NetworkFilterColorInline(admin.StackedInline):
+class NetworkFilterColorInline(admin.TabularInline):
     model = product_models.NetworkFilterColor
-    extra = 1
+    readonly_fields = ('image_preview',)
+    extra = 0
 
+    def image_preview(self, obj):
+        return obj.image_preview
+
+    image_preview.short_description = 'Предпросмотр изображения'
+    image_preview.allow_tags = True
+
+
+admin.site.register(reviews_models.SocketReview)
 
 @admin.register(collection_models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
@@ -191,7 +250,7 @@ class CollectionAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -211,6 +270,7 @@ class ProductOfferAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
 
+
 @admin.register(product_models.Socket)
 class SocketAdmin(admin.ModelAdmin):
     list_display = ('name', 'thumbnail_preview',)
@@ -227,7 +287,7 @@ class SocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('socket_type', 'montage', 'terminal', 'rated_current')
@@ -246,7 +306,7 @@ class SocketAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
     def slugfield(self, obj):
@@ -268,7 +328,7 @@ class SwitchAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('switch_type', 'montage', 'terminal', 'rated_current')
@@ -287,7 +347,7 @@ class SwitchAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -307,7 +367,7 @@ class FrameAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('frame_type',)
@@ -326,7 +386,7 @@ class FrameAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -346,7 +406,7 @@ class PlugAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('plug_type', 'montage', )
@@ -365,7 +425,7 @@ class PlugAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -385,7 +445,7 @@ class ComputerSocketAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('computer_socket_type', 'montage', )
@@ -404,7 +464,7 @@ class ComputerSocketAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -424,7 +484,7 @@ class DimmerAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': ('dimmer_type', 'montage', 'terminal')
@@ -443,7 +503,7 @@ class DimmerAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -475,7 +535,7 @@ class ThermostatAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': (
@@ -508,7 +568,7 @@ class ThermostatAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 
@@ -541,7 +601,7 @@ class NetworkFilterAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'product_offer', 'category', 'collection')
+            'fields': ('name', 'slug', 'code', 'description', 'manufacturer', 'thumbnail', 'thumbnail_preview', 'product_offer', 'category', 'collection')
         }),
         ('Основные', {
             'fields': (
@@ -566,7 +626,7 @@ class NetworkFilterAdmin(admin.ModelAdmin):
     def thumbnail_preview(self, obj):
             return obj.thumbnail_preview
 
-    thumbnail_preview.short_description = 'Изображение'
+    thumbnail_preview.short_description = 'Предпросмотр изображения'
     thumbnail_preview.allow_tags = True
 
 

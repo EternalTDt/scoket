@@ -9,6 +9,7 @@ from .models import category_models
 from .models import brand_models
 from .models import collection_models
 from .models import product_models
+from .models import reviews_models
 from .service import (
     SocketFilter,
     SwitchFilter,
@@ -40,6 +41,8 @@ from .serializers import (
     DimmerSerializer,
     ThermostatSerializer,
     NetworkFilterSerializer,
+
+    SocketReviewSerializer
 )
 
 
@@ -210,7 +213,6 @@ class SocketListView(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
-
 class SocketDetailView(generics.RetrieveAPIView):
     queryset = product_models.Socket.objects.all()
     serializer_class = SocketSerializer
@@ -342,3 +344,11 @@ class NetworkFilterDetailView(generics.RetrieveAPIView):
     serializer_class = NetworkFilterSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class SocketReviewListView(generics.ListCreateAPIView):
+    queryset = reviews_models.SocketReview.objects.all()
+    serializer_class = SocketReviewSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

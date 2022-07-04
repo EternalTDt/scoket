@@ -48,6 +48,8 @@ from .views import (
     NetworkFilterListView,
     NetworkFilterDetailView,
 
+    SocketReviewListView,
+
 )
 
 urlpatterns = [
@@ -71,6 +73,7 @@ urlpatterns_product = [
     path('products/', ProductsAPIView.as_view(), name="products"),
     path('socket/', SocketListView.as_view(), name="socket"),
     path('socket/<slug:slug>/', SocketDetailView.as_view(), name="socket-detail"),
+    path('add-review/socket/', SocketReviewListView.as_view(), name='socket-add-review'),
     path('switch/', SwitchListView.as_view(), name="switch"),
     path('switch/<slug:slug>/', SwitchDetailView.as_view(), name="switch-detail"),
     path('frame/', FrameListView.as_view(), name="frame"),
